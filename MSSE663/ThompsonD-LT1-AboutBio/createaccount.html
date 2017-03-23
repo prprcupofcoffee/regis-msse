@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create TravelMagic Account</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/styles.css" rel="stylesheet"/>
+        <script src="script/ui.js"></script>
+        <script src="script/validate.js"></script>
+        <script src="script/createaccount.js"></script>
+    </head>
+    <body class="flex-container-account">
+        <header class="flex-item-account" onmouseover="enterSection(this);" onmouseout="leaveSection(this);">
+            <h1>Create a TravelMagic Account</h1>
+            Create an account with us to help us let you know about travel opportunities that interest you.
+        </header>
+        <main class="flex-item-account" onmouseover="enterSection(this);" onmouseout="leaveSection(this);">
+            <h2>Account Information</h2>
+            Please provide the following:
+            <form id="account" onsubmit="return validateInput() && submitAccount()">
+                <ul>
+                    <li class="form-input-visible">
+                        <label for="first-name">First name:</label>
+                        <input type="text" id="first-name" name="first-name" placeholder="Enter your first name" onfocus="enterInput(this);" onblur="leaveInput(this);">
+                    </li>
+                    <li id="first-name-error" class="form-input-hidden">
+                        <div class="message-spacer">&nbsp;</div>
+                        <div class="message">Please ensure a non-blank first name has been entered.</div>
+                    </li>
+                    <li class="form-input-visible">
+                        <label for="last-name">Last name:</label>
+                        <input type="text" id="last-name" name="last-name" placeholder="Enter your last name" onfocus="enterInput(this);" onblur="leaveInput(this);">
+                    </li>
+                    <li id="last-name-error" class="form-input-hidden">
+                        <div class="message-spacer">&nbsp;</div>
+                        <div class="message">Please ensure a non-blank last name has been entered.</div>
+                    </li>
+                    <li class="form-input-visible">
+                        <label for="email-address">Email address:</label>
+                        <input type="email" id="email-address" name="email-address" placeholder="Enter your email address" onfocus="enterInput(this);" onblur="leaveInput(this);">
+                    </li>
+                    <li id="email-address-error" class="form-input-hidden">
+                        <div class="message-spacer">&nbsp;</div>
+                        <div class="message">Please ensure a non-blank email address has been entered.</div>
+                    </li>
+                    <li class="form-input-visible">
+                        <label for="user-name">User name:</label>
+                        <input type="text" id="user-name" name="user-name" placeholder="Enter your user name" onfocus="enterInput(this);" onblur="leaveInput(this);">
+                    </li>
+                    <li id="user-name-error" class="form-input-hidden">
+                        <div class="message-spacer">&nbsp;</div>
+                        <div class="message">
+                            Please ensure a user name has been entered.<br>
+                            User names may not contain spaces.
+                        </div>
+                    </li>
+                    <li class="form-input-visible">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" placeholder="Enter your password" onfocus="enterInput(this);" onblur="leaveInput(this);">
+                    </li>
+                    <li id="password-error" class="form-input-hidden">
+                        <div class="message-spacer">&nbsp;</div>
+                        <div class="message">
+                            Please ensure a password has been entered.<br>
+                            Passwords must be at least eight characters long.
+                        </div>
+                    </li>
+                    <li class="form-input-visible">
+                        <label for="password-confirm">Confirm password:</label>
+                        <input type="password" id="password-confirm" name="password-confirm" placeholder="Confirm your password" onfocus="enterInput(this);" onblur="leaveInput(this);">
+                    </li>
+                    <li id="password-confirm-error" class="form-input-hidden">
+                        <div class="message-spacer">&nbsp;</div>
+                        <div class="message">Please ensure the two passwords match.</div>
+                    </li>
+                    <li class="form-input-visible">
+                        <button type="submit">Submit</button>
+                    </li>
+                    <li id="account-success-message" class="form-input-hidden">
+                        <div class="message-spacer">&nbsp;</div>
+                        <div class="message">The account was created successfully.</div>
+                    </li>
+                    <li id="account-error-message" class="form-input-hidden">
+                        <div class="message-spacer">&nbsp;</div>
+                        <div class="message">There was an error creating the account.</div>
+                    </li>
+                    <li id="account-inuse-message" class="form-input-hidden">
+                        <div class="message-spacer">&nbsp;</div>
+                        <div class="message">The username you selected is already being used.</div>
+                    </li>
+                </ul>
+            </form>
+        </main>
+        <footer class="flex-item-account" onmouseover="enterSection(this);" onmouseout="leaveSection(this);">
+            &nbsp;&nbsp;&nbsp;<a href="#">Home</a>&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;<a href="about.html">About</a>&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;<a href="#">Contact Us</a>&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;<a href="#">Locations</a>&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;<a href="#">Create an Account</a>&nbsp;&nbsp;&nbsp;
+        </footer>
+    </body>
+</html>
