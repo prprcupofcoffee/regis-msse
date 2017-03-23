@@ -1,0 +1,54 @@
+/* 
+    Created on : Feb 2, 2017, 8:48:06 PM
+    Author     : david
+*/
+
+body {
+    background-color: #99a299;
+    margin: 0 0;
+}
+
+.flex-container {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.flex-item {
+    margin: 10px;
+    border-width: 2px;
+    border-color: #4aa221;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 10px;
+    flex: 1 1 auto;
+}
+
+#about {
+    width: 90%;
+}
+
+#welcome {
+    width: 90%;
+    text-align: center;
+}
+
+#footer {
+    width: 90%;
+}
+
+#agents {
+    width: 35%;
+}
+
+.about-section {
+    width: 25%;
+}
+
+.bio-section {
+    width: 40%;
+}
+
+.agent {
+    float: left;
+    text-align: center;
+}
