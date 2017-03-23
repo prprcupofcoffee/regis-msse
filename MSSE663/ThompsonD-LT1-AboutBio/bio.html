@@ -5,9 +5,17 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="css/styles.css" rel="stylesheet" />
+        <script src="js/uiHelper.js"></script>
+        <script src="js/libs/jquery/jquery.min.js"></script>
+        <script>
+            $(function() {
+                $(".flex-item").hover(uiHelper.enterSection, uiHelper.leaveSection);
+                $("#login-toggle").click(uiHelper.setLoginFormVisible);
+            });
+        </script>
     </head>
     <body class="flex-container">
-        <header id="about" class="flex-item" onmouseover="enterSection(this);" onmouseout="leaveSection(this);">
+        <header id="about" class="flex-item">
             <section id="self-contact">
                 <h2>David Thompson</h2>
                 <p />
@@ -19,21 +27,21 @@
                 <img src="David.jpg" />
             </section>
         </header>
-        <section id="education" class="bio-section flex-item" onmouseover="enterSection(this);" onmouseout="leaveSection(this);">
+        <section id="education" class="bio-section flex-item">
             <h2>Education</h2>
             <ul>
                 <li>2018, Regis University - <strong>M.S. Software Engineering</strong></li>
                 <li>2015, Colorado State College - <strong>B.S. Information Technology</strong></li>
             </ul>
         </section>
-        <section id="hobbies" class="bio-section flex-item" onmouseover="enterSection(this);" onmouseout="leaveSection(this);">
+        <section id="hobbies" class="bio-section flex-item">
             <h2>Hobbies</h2>
             <ul>
                 <li>Hiking</li>
                 <li>Woodworking</li>
             </ul>
         </section>
-        <section id="work" class="bio-section flex-item" onmouseover="enterSection(this);" onmouseout="leaveSection(this);">
+        <section id="work" class="bio-section flex-item">
             <h2>Work Experience</h2>
             <ul>
                 <li>
@@ -52,19 +60,37 @@
                 </li>
             </ul>
         </section>
-        <section id="references" class="bio-section flex-item" onmouseover="enterSection(this);" onmouseout="leaveSection(this);">
+        <section id="references" class="bio-section flex-item">
             <h2>References</h2>
             <ul>
                 <li>Stephen M. / <a href="mailto:stephen@example.com">stephen@example.com</a> / <a href="tel:3035551234">(303) 555-1234</a></li>
                 <li>Marcus B. / <a href="mailto:marcus@example.com">marcus@example.com</a> / <a href="tel:3035554321">(303) 555-4321</a></li>
             </ul>
         </section>
-        <footer id="footer" class="flex-item" onmouseover="enterSection(this);" onmouseout="leaveSection(this);">
+        <footer id="footer" class="flex-item">
             &nbsp;&nbsp;&nbsp;<a href="#">Home</a>&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;<a href="about.html">About</a>&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;<a href="#">Contact Us</a>&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;<a href="#">Locations</a>&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;<a href="createaccount.html">Create an Account</a>&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;<a href="#" id="login-toggle">Login</a>&nbsp;&nbsp;&nbsp;
+        </footer>
+        <footer id="login-form" class="flex-item form-input-hidden">
+            <form class="flex-container">
+                <div class="flex-container" style="padding: 3px; flex: 1 0 auto">
+                    <div style="padding: 3px; flex: 1 0 auto" class="flex-container">
+                        <label for="last-name" style="flex: 0 0 auto">Username:&nbsp;</label>
+                        <input type="text" id="tmusername" name="tmusername" placeholder="Enter your TravelMagic user name" style="flex: 1 0 auto">
+                    </div>
+                    <div style="padding: 3px; flex: 1 0 auto" class="flex-container">
+                        <label for="last-name" style="flex: 0 0 auto">Password:&nbsp;</label>
+                        <input type="password" id="tmpassword" name="tmpassword" placeholder="Enter your TravelMagic password" style="flex: 1 0 auto">
+                    </div>
+                </div>
+                <div style="padding: 3px; flex: 0 0 auto">
+                    <button type="submit">Login</button>
+                </div>
+            </form>
         </footer>
     </body>
 </html> 
