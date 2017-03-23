@@ -1,0 +1,133 @@
+/* 
+    Created on : Feb 2, 2017, 8:48:06 PM
+    Author     : david
+*/
+
+body {
+    background-color: #99a299;
+    margin: 0 0;
+}
+
+.account-message {
+    text-align: center;
+}
+
+.flex-container {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.flex-container-account {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+}
+
+.flex-item {
+    margin: 10px;
+    border-width: 2px;
+    border-color: #4aa221;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 10px;
+    flex: 1 1 auto;
+}
+
+.flex-item-account {
+    margin: 10px;
+    border-width: 2px;
+    border-color: #4aa221;
+    border-style: solid;
+    border-radius: 10px;
+    padding: 10px;
+    flex: 0 0 70%;
+}
+
+.about-section {
+    width: 20%;
+}
+
+.bio-section {
+    width: 40%;
+}
+
+.border-highlight {
+    border-color: white;
+}
+
+.input-highlight {
+    background-color: #def7d8;
+}
+
+.message {
+    color: red;
+}
+
+.agent {
+    float: left;
+    text-align: center;
+}
+
+#about {
+    width: 90%;
+}
+
+#welcome {
+    width: 90%;
+    text-align: center;
+}
+
+#footer {
+    width: 90%;
+}
+
+#agents {
+    width: 35%;
+}
+
+#self-contact {
+    float: left;
+}
+
+#self-image {
+    float: right;
+}
+
+/*
+ * Create Account page
+ */
+.form-input-hidden {
+    display: none;
+}
+
+.form-input-visible {
+    display: flex;
+}
+
+#account li {
+    flex-wrap: wrap;
+    align-items: center;
+    margin: 5px;
+    max-width: 640px;
+}
+
+#account li > label,
+#account li > .message-spacer { /* labels at least 120px up to 160px */
+    flex: 1 0 120px;
+    max-width: 160px;
+}
+
+#account li > input { /* elements after labels at least 220px */
+    flex: 1 0 220px;
+}
+
+#account li button {
+  margin-left: auto;
+  padding: 8px 16px;
+  border: none;
+  background: #4aa221;
+  color: #f2f2f2;
+  text-transform: uppercase;
+  letter-spacing: .09em;
+  border-radius: 2px;
+}
