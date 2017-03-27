@@ -31,8 +31,8 @@ uiHelper = (function() {
         $(this).removeClass("border-highlight");
     };
     
-    var setLoginFormVisible = function() {
-        $("#login-form").fadeIn(200);
+    var toggleLoginFormVisible = function() {
+        $("#login-form").fadeToggle(200);
     }
 
     // Public API
@@ -42,6 +42,6 @@ uiHelper = (function() {
         enterSection: enterSection,
         leaveInput: leaveInput,
         leaveSection: leaveSection,
-        setLoginFormVisible: setLoginFormVisible
+        toggleLoginFormVisible: toggleLoginFormVisible
     };
 })();
