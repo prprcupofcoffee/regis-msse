@@ -14,7 +14,7 @@
                 $(".flex-item-account").hover(uiHelper.enterSection, uiHelper.leaveSection);
                 $("input").focus(uiHelper.enterInput)
                           .blur(uiHelper.leaveInput);
-                $("#login-toggle").click(uiHelper.setLoginFormVisible);
+                $("#login-toggle").click(uiHelper.toggleLoginFormVisible);
             });
         </script>
     </head>
@@ -85,17 +85,9 @@
                     <li class="form-input-visible">
                         <button type="submit">Submit</button>
                     </li>
-                    <li id="account-success-message" class="form-input-hidden">
+                    <li id="account-response-message" class="form-input-hidden">
                         <div class="message-spacer">&nbsp;</div>
-                        <div class="message">The account was created successfully.</div>
-                    </li>
-                    <li id="account-error-message" class="form-input-hidden">
-                        <div class="message-spacer">&nbsp;</div>
-                        <div class="message">There was an error creating the account.</div>
-                    </li>
-                    <li id="account-inuse-message" class="form-input-hidden">
-                        <div class="message-spacer">&nbsp;</div>
-                        <div class="message">The username you selected is already being used.</div>
+                        <div class="message">&nbsp;</div>
                     </li>
                 </ul>
             </form>
