@@ -1,10 +1,14 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="aboutBioApp">
     <head>
         <title>About David</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.5/css/bootstrap-theme.css">
+        <link rel="stylesheet" href="styles/app.css">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular.js"></script>
+        <script src="js/app.js"></script>
+        <link href="styles/styles.css" rel="stylesheet" />
         <script src="js/uiHelper.js"></script>
         <script src="js/libs/jquery/jquery.min.js"></script>
         <script>
@@ -14,14 +18,14 @@
             });
         </script>
     </head>
-    <body class="flex-container">
+    <body class="flex-container" ng-controller="viewBio">
         <header id="about" class="flex-item">
             <section id="self-contact">
-                <h2>David Thompson</h2>
+                <h2>{{bioInfo.name}}</h2>
                 <p />
-                <a href="mailto:david@travelmagic.aa">david@travelmagic.aa</a>
+                <a href="{{bioInfo.emailLink}}">{{bioInfo.email}}</a>
                 <br />
-                <a href="tel:5015551234">(501) 555-1234</a>
+                <a href="{{bioInfo.phoneLink}}">{{bioInfo.phone}}</a>
             </section>
             <section id="self-image">
                 <img src="David.jpg" />
