@@ -18,25 +18,9 @@ and open the template in the editor.
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="styles/app.css">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.6/angular-route.js"></script>
         <script src="js/app.js"></script>
     </head>
-    <body ng-controller="viewLessons">
-        <div class="container-fluid">
-            <form class="form-inline">
-                <input type="text" class="form-control" placeholder="Filter Lessons" ng-model="filterText">
-                <button class="btn btn-default" ng-click="resetFilter()">Reset</button>
-            </form>
-            <ul class="list-group" ng-repeat="historyItem in filterHistory">
-                <li class="list-group-item">{{historyItem}}</li>
-            </ul>
-            <div class="panel panel-default" ng-repeat="lesson in lessons | filter:filterText">
-                <div class="panel-heading">
-                    Lesson {{lesson.order}}: {{lesson.title}}
-                </div>
-                <div class="panel-body">
-                    Link: <a href="{{lesson.url}}">{{lesson.url}}</a>
-                </div>
-            </div>
-        </div>
+    <body ng-view>
     </body>
 </html>
