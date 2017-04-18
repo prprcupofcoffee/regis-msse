@@ -1,6 +1,24 @@
 <!DOCTYPE html>
-<div>
-    Lesson number: {{lessonID}}
-    <br/>
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Lesson Details
+    </div>
+    <div class="panel-body" ng-show="error != null">
+        <div>
+            {{error.errorMessage}}
+        </div>
+    </div>
+    <div class="panel-body" ng-show="error == null">
+        <div>
+            Lesson Number: {{lesson.id}}
+        </div>
+        <div>
+            Lesson Title: {{lesson.title}}
+        </div>
+        <div>
+            Lesson Link: <a href="{{lesson.url}}">{{lesson.url}}</a>
+        </div>
+    </div>
+    <p>
     <a href="#/reviews">&lt;&lt; Back</a>
 </div>
