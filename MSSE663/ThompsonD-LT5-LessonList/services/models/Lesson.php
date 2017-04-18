@@ -18,7 +18,7 @@ class Lesson implements JsonSerializable {
 
     public function jsonSerialize() {
         return [
-            'id' => $this->commonName,
+            'id' => $this->id,
             'title' => $this->title,
             'url' => $this->url
         ];
