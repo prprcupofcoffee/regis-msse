@@ -45,43 +45,11 @@ lessonsListApp.controller('viewLessons', ['$scope', '$location', '$http', functi
     $http.get('/services/lessonsService.php')
             .then(function(response) {
                 $scope.lessons = response.data;
+                $('.flexslider').flexslider();
             },
             function errorCallback(response) {
                 $scope.error = response.data;
             });
-//    $scope.lessons = [{
-//        id: 1,
-//        title: 'jQuery - Getting Started',
-//        url: 'https://worldclass.regis.edu/d2l/le/content/200883/viewContent/2475980/View'
-//    }, {
-//        id: 2,
-//        title: 'jQuery - AJAX',
-//        url: 'https://worldclass.regis.edu/d2l/le/content/200883/viewContent/2475981/View'
-//    }, {
-//        id: 3,
-//        title: 'Angular JS - Introduction',
-//        url: 'https://worldclass.regis.edu/d2l/le/content/200883/viewContent/2475982/View'
-//    }, {
-//        id: 4,
-//        title: 'Angular JS - Views and Templates',
-//        url: 'https://worldclass.regis.edu/d2l/le/content/200883/viewContent/2475983/View'
-//    }, {
-//        id: 5,
-//        title: 'Angular JS - Routing, Events, REST, and HTTP',
-//        url: 'https://worldclass.regis.edu/d2l/le/content/200883/viewContent/2475984/View'
-//    }, {
-//        id: 6,
-//        title: 'Angular JS - Content Sliders',
-//        url: 'https://worldclass.regis.edu/d2l/le/content/200883/viewContent/2475985/View'
-//    }, {
-//        id: 7,
-//        title: 'Google Maps API',
-//        url: 'https://worldclass.regis.edu/d2l/le/content/200883/viewContent/2475986/View'
-//    }, {
-//        id: 8,
-//        title: 'Google Places API',
-//        url: 'https://worldclass.regis.edu/d2l/le/content/200883/viewContent/2475987/View'
-//    }]    
 }]);
 
 lessonsListApp.controller('viewLessonDetails', ['$scope', '$routeParams', '$http', function($scope, $routeParams, $http) {
