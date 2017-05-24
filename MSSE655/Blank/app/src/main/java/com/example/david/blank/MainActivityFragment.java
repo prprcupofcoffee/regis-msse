@@ -1,12 +1,16 @@
 package com.example.david.blank;
 
+import android.content.Intent;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -36,5 +40,21 @@ public class MainActivityFragment extends Fragment {
         ArrayAdapter<String> thingsArrayAdapter = new ArrayAdapter<>(rootView.getContext(),
                 android.R.layout.simple_list_item_1, thingsList);
 
+        thingsListView.setAdapter(thingsArrayAdapter);
+
+        thingsListView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String item = (String) thingsListView.getItemAtPosition(position);
+                        Intent intent = new Intent(view.getContext(), DetailActivity.class);
+                        intent.putExtra("item", item);
+                        startActivity(intent);
+                    }
+                }
+
+        );
+
+        return rootView;
     }
 }

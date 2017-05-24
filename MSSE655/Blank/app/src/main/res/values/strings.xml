@@ -6,4 +6,5 @@
         <item>Thing 2</item>
         <item>Thing 3</item>
     </string-array>
+    <string name="title_activity_detail">DetailActivity</string>
 </resources>
