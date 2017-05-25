@@ -6,4 +6,5 @@
         <item>Bookcase 2</item>
         <item>Bookcase 3</item>
     </string-array>
+    <string name="title_activity_detail">DetailActivity</string>
 </resources>

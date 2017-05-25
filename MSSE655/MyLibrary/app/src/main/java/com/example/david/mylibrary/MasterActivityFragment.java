@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -46,7 +47,18 @@ public class MasterActivityFragment extends Fragment {
         bookcasesListView = (ListView) rootView.findViewById(R.id.bookcases_listView);
         bookcasesListView.setAdapter(bookcaseNamesAdapter);
 
-        // provide the instantiated list view
+        // handle tap/click on an item
+        //
+        bookcasesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                // get the entry at the indicated position
+                // and send it to the detail activity
+                //
+            }
+        });
+
+        // provide the instantiated and initialized list view
         //
         return rootView;
     }
