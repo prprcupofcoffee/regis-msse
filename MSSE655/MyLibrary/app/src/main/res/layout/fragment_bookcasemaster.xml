@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.david.mylibrary.MasterActivityFragment"
-    tools:showIn="@layout/activity_master">
+    tools:context="com.example.david.mylibrary.BookcaseMasterActivityFragment"
+    tools:showIn="@layout/activity_bookcasemaster">
 
     <ListView
         android:id="@+id/bookcases_listView"

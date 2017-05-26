@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MasterActivity"
+            android:name=".BookcaseMasterActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -20,13 +20,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".DetailActivity"
-            android:label="@string/title_activity_detail"
-            android:parentActivityName=".MasterActivity"
+            android:name=".BookcaseDetailActivity"
+            android:label="@string/title_activity_bookcasedetail"
+            android:parentActivityName=".BookcaseMasterActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.david.mylibrary.MasterActivity" />
+                android:value="com.example.david.mylibrary.BookcaseMasterActivity" />
         </activity>
     </application>
 

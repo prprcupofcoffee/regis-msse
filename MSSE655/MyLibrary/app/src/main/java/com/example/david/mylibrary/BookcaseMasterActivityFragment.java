@@ -1,5 +1,6 @@
 package com.example.david.mylibrary;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,14 +17,14 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class MasterActivityFragment extends Fragment {
+public class BookcaseMasterActivityFragment extends Fragment {
 
     // storage for the list of bookcases and the associated View
     //
     private List<String> bookcaseNames = null;
     private ListView bookcasesListView = null;
 
-    public MasterActivityFragment() {
+    public BookcaseMasterActivityFragment() {
     }
 
     @Override
@@ -32,7 +33,7 @@ public class MasterActivityFragment extends Fragment {
 
         // get the view so it can be populated
         //
-        View rootView = inflater.inflate(R.layout.fragment_master, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_bookcasemaster, container, false);
 
         // load the names of the available bookcases into an Adapter
         // so it can be bound to the view
@@ -52,13 +53,20 @@ public class MasterActivityFragment extends Fragment {
         bookcasesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 // get the entry at the indicated position
                 // and send it to the detail activity
                 //
+                String item = (String) bookcasesListView.getItemAtPosition(position);
+                Intent intent = new Intent(view.getContext(), BookcaseDetailActivity.class);
+                intent.putExtra("item", item);
+
+                startActivity(intent);
             }
         });
 
-        // provide the instantiated and initialized list view
+        // provide the instantiated and initialized fragment
+        // and its child views
         //
         return rootView;
     }
