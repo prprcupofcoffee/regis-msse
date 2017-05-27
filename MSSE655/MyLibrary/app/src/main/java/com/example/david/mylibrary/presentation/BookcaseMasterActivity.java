@@ -1,4 +1,4 @@
-package com.example.david.mylibrary;
+package com.example.david.mylibrary.presentation;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -9,10 +9,15 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.david.mylibrary.R;
+
+import dagger.android.AndroidInjection;
+
 public class BookcaseMasterActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookcasemaster);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
