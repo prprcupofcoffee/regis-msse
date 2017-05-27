@@ -10,15 +10,23 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.david.mylibrary.R;
+import com.example.david.mylibrary.persistence.StringRepository;
+
+import java.util.List;
+
+import javax.inject.Inject;
 
 import dagger.android.AndroidInjection;
 
 public class BookcaseMasterActivity extends AppCompatActivity {
+    @Inject
+    StringRepository bookcaseRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_bookcasemaster);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -27,7 +35,7 @@ public class BookcaseMasterActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, String.format("There are %d items in the repository.", bookcaseRepository.getAll().size()), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

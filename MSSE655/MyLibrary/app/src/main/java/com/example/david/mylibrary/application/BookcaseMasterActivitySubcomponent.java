@@ -6,8 +6,8 @@ import dagger.Subcomponent;
 import dagger.android.AndroidInjector;
 
 /**
- * This is a Dagger subcomponent. It allows dependencies to
- * be injected into {@link com.example.david.mylibrary.presentation.BookcaseMasterActivity}.
+ * This is a Dagger subcomponent. It aggregates providers for injection into
+ * {@link com.example.david.mylibrary.presentation.BookcaseMasterActivity}.
  */
 @Subcomponent
 public interface BookcaseMasterActivitySubcomponent extends AndroidInjector<BookcaseMasterActivity> {

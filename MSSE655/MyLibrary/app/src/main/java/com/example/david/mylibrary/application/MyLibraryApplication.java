@@ -20,6 +20,7 @@ public class MyLibraryApplication extends Application implements HasActivityInje
     @Override
     public void onCreate() {
         super.onCreate();
+        DaggerApplicationComponent.create().inject(this);
     }
 
     @Override
