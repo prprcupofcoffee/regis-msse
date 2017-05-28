@@ -13,7 +13,9 @@ import dagger.android.AndroidInjectionModule;
 @Component(modules = {
         AndroidInjectionModule.class,
         BookcaseMasterActivityModule.class,
-        BookcaseDetailActivityModule.class
+        BookcaseMasterActivityFragmentModule.class,
+        BookcaseDetailActivityModule.class,
+        BookcaseDetailActivityFragmentModule.class
 })
 public interface ApplicationComponent {
     void inject(MyLibraryApplication application);

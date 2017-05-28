@@ -2,7 +2,7 @@ package com.example.david.mylibrary.application;
 
 import android.app.Fragment;
 
-import com.example.david.mylibrary.presentation.BookcaseMasterActivityFragment;
+import com.example.david.mylibrary.presentation.BookcaseDetailActivityFragment;
 
 import dagger.Binds;
 import dagger.Module;
@@ -16,11 +16,11 @@ import dagger.multibindings.IntoMap;
  * It provides a builder method connecting
  * the activity with its injector.
  */
-@Module(subcomponents = BookcaseMasterActivityFragmentSubcomponent.class)
-public abstract class BookcaseMasterActivityFragmentModule {
+@Module(subcomponents = BookcaseDetailActivityFragmentSubcomponent.class)
+public abstract class BookcaseDetailActivityFragmentModule {
     @Binds
     @IntoMap
-    @FragmentKey(BookcaseMasterActivityFragment.class)
+    @FragmentKey(BookcaseDetailActivityFragment.class)
     abstract AndroidInjector.Factory<? extends Fragment>
-        bindBookcaseMasterActivityFragmentInjectorFactory(BookcaseMasterActivityFragmentSubcomponent.Builder builder);
+        bindBookcaseDetailActivityFragmentInjectorFactory(BookcaseDetailActivityFragmentSubcomponent.Builder builder);
 }

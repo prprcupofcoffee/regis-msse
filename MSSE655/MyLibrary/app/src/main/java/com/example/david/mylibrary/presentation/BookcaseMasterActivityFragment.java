@@ -1,7 +1,8 @@
 package com.example.david.mylibrary.presentation;
 
+import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,15 +12,24 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.david.mylibrary.R;
+import com.example.david.mylibrary.persistence.StringRepository;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.inject.Inject;
+
+import dagger.android.AndroidInjection;
+
 /**
  * A placeholder fragment containing a simple view.
  */
 public class BookcaseMasterActivityFragment extends Fragment {
+    // source for bookcase names
+    //
+    @Inject
+    StringRepository bookcaseNameRespository;
 
     // storage for the list of bookcases and the associated View
     //
@@ -37,8 +47,9 @@ public class BookcaseMasterActivityFragment extends Fragment {
         // load the names of the available bookcases into an Adapter
         // so it can be bound to the view
         //
-        bookcaseNames = new ArrayList<String>(
-                Arrays.asList(getResources().getStringArray(R.array.bookcases_list)));
+//        bookcaseNames = new ArrayList<String>(
+//                Arrays.asList(getResources().getStringArray(R.array.bookcases_list)));
+        bookcaseNames = bookcaseNameRespository.getAll();
         ArrayAdapter<String> bookcaseNamesAdapter = new ArrayAdapter<>(
                 rootView.getContext(), android.R.layout.simple_list_item_1, bookcaseNames);
 
@@ -68,5 +79,17 @@ public class BookcaseMasterActivityFragment extends Fragment {
         // and its child views
         //
         return rootView;
+    }
+
+    /**
+     * Called when this fragment is first attached to an {@link android.app.Activity}.
+     * Injects the fragment with its dependencies.
+     *
+     * @param context   The application context of the fragment.
+     */
+    @Override
+    public void onAttach(Context context) {
+        AndroidInjection.inject(this);
+        super.onAttach(context);
     }
 }

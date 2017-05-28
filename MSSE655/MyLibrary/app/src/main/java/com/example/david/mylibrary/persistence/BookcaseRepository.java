@@ -22,4 +22,16 @@ public class BookcaseRepository implements StringRepository {
     public List<String> getAll() {
         return bookcaseNames;
     }
+
+    /**
+     * Provide additional information about a named bookcase.
+     */
+    public String getAdditionalInfo(String item) {
+        switch (item) {
+            case "Bookcase 1": return "127 books";
+            case "Bookcase 2": return "64 books";
+            case "Bookcase 3": return "93 books";
+            default: return "";
+        }
+    }
 }
