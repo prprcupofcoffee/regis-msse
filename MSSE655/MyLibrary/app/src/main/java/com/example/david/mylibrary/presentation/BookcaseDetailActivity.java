@@ -9,13 +9,10 @@ import android.view.View;
 
 import com.example.david.mylibrary.R;
 
-import dagger.android.AndroidInjection;
-
 public class BookcaseDetailActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        AndroidInjection.inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bookcasedetail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

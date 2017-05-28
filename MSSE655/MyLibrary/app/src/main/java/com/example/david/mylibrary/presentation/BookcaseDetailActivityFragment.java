@@ -1,7 +1,5 @@
 package com.example.david.mylibrary.presentation;
 
-import android.app.Fragment;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,16 +7,16 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.david.mylibrary.R;
+import com.example.david.mylibrary.application.InjectableFragment;
 import com.example.david.mylibrary.persistence.StringRepository;
 
 import javax.inject.Inject;
 
-import dagger.android.AndroidInjection;
-
 /**
- * A placeholder fragment containing a simple view.
+ * A fragment containing a simple view displaying
+ * detailed information about a bookcase.
  */
-public class BookcaseDetailActivityFragment extends Fragment {
+public class BookcaseDetailActivityFragment extends InjectableFragment {
     // source for bookcase names
     //
     @Inject
@@ -53,17 +51,5 @@ public class BookcaseDetailActivityFragment extends Fragment {
         // and its child views
         //
         return rootView;
-    }
-
-    /**
-     * Called when this fragment is first attached to an {@link android.app.Activity}.
-     * Injects the fragment with its dependencies.
-     *
-     * @param context   The application context of the fragment.
-     */
-    @Override
-    public void onAttach(Context context) {
-        AndroidInjection.inject(this);
-        super.onAttach(context);
     }
 }
