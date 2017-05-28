@@ -26,9 +26,6 @@ public class BookcaseMasterActivityFragment extends Fragment {
     private List<String> bookcaseNames = null;
     private ListView bookcasesListView = null;
 
-    public BookcaseMasterActivityFragment() {
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

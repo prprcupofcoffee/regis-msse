@@ -1,8 +1,6 @@
 package com.example.david.mylibrary.application;
 
-import android.app.Application;
-
-import java.util.List;
+import javax.inject.Singleton;
 
 import dagger.Component;
 import dagger.android.AndroidInjectionModule;
@@ -11,9 +9,11 @@ import dagger.android.AndroidInjectionModule;
  * This is a Dagger component. It aggregates providers for injection into
  * the Application object.
  */
+@Singleton
 @Component(modules = {
-        AndroidInjectionModule.class/*,
-        BookcaseMasterActivityModule.class,*/
+        AndroidInjectionModule.class,
+        BookcaseMasterActivityModule.class,
+        BookcaseDetailActivityModule.class
 })
 public interface ApplicationComponent {
     void inject(MyLibraryApplication application);
