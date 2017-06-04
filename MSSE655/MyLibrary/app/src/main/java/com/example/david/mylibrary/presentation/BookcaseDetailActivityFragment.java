@@ -17,38 +17,57 @@ import javax.inject.Inject;
  * detailed information about a bookcase.
  */
 public class BookcaseDetailActivityFragment extends InjectableFragment {
+
+    // view to update when the selected bookcase changes
+    //
+    TextView mBookcaseDetailsView;
+
     // source for bookcase names
     //
     @Inject
-    StringRepository bookcaseNameRespository;
+    StringRepository mBookcaseNameRepository;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // get the view so it can be populated
-        //
-        View rootView = inflater.inflate(R.layout.fragment_bookcasedetail, container, false);
-
-        // get the item that was selected from the intent
-        // that started the activity
-        //
-        String item = getActivity().getIntent()
-                                   .getStringExtra("item");
+    /**
+     * Callback method to be invoked when a bookcase has been
+     * selected in another view.
+     *
+     * @param bookcaseName The name of the bookcase that was selected.
+     */
+    public void onSelectedBookcaseChanged(String bookcaseName) {
 
         // find additional information about the item, if any
         //
-        String additionalInfo = bookcaseNameRespository.getAdditionalInfo(item);
+        String additionalInfo = mBookcaseNameRepository.getAdditionalInfo(bookcaseName);
         if (additionalInfo != null && additionalInfo.length() > 0) {
-            item = String.format("%s (%s)", item, additionalInfo);
+            bookcaseName = String.format("%s (%s)", bookcaseName, additionalInfo);
         }
 
         // show something in the UI
         //
-        TextView bookcaseDetailsTextView = (TextView) rootView.findViewById(R.id.detail_text);
-        bookcaseDetailsTextView.setText(item);
+        mBookcaseDetailsView.setText(bookcaseName);
+    }
 
-        // provide the instantiated and initialized fragment
-        // and its child views
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     *
+     * @param inflater              The {@link LayoutInflater} to use to inflate the XML layout.
+     * @param container             The {@link ViewGroup} where the fragment is being sited.
+     * @param savedInstanceState    A {@link Bundle} containing saved state if the fragment is being reconstructed.
+     * @return                      The {@link View} to display in the parent container.
+     */
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        // create the view to be displayed in the fragment
+        //
+        View rootView = inflater.inflate(R.layout.fragment_bookcasedetail, container, false);
+
+        // obtain the view to be updated when the selected bookcase changes
+        //
+        mBookcaseDetailsView = (TextView) rootView.findViewById(R.id.detail_text);
+
+        // provide the instantiated fragment and its child views
         //
         return rootView;
     }

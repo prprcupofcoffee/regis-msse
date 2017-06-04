@@ -1,6 +1,6 @@
 package com.example.david.mylibrary.presentation;
 
-import android.content.Intent;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,16 +21,37 @@ import javax.inject.Inject;
  * A fragment containing a simple view displaying a list of bookcases.
  */
 public class BookcaseMasterActivityFragment extends InjectableFragment {
+
+    /**
+     * Interface definition for a callback to be invoked
+     * when a bookcase has been selected in another view.
+     */
+    public interface OnBookcaseSelectedListener {
+
+        /**
+         * Callback method to be invoked when a bookcase has been
+         * selected in another view.
+         *
+         * @param bookcaseName The name of the bookcase that was selected.
+         */
+        public void onBookcaseSelected(String bookcaseName);
+    }
+
+    OnBookcaseSelectedListener mBookcaseSelectedListener;
+
     // source for bookcase names
     //
     @Inject
-    StringRepository bookcaseNameRespository;
+    StringRepository mBookcaseNameRepository;
 
-    // storage for the list of bookcases and the associated View
-    //
-    private List<String> bookcaseNames = null;
-    private ListView bookcasesListView = null;
-
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     *
+     * @param inflater           The {@link LayoutInflater} to use to inflate the XML layout.
+     * @param container          The {@link ViewGroup} where the fragment is being sited.
+     * @param savedInstanceState A {@link Bundle} containing saved state if the fragment is being reconstructed.
+     * @return The {@link View} to display in the parent container.
+     */
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,13 +63,13 @@ public class BookcaseMasterActivityFragment extends InjectableFragment {
         // load the names of the available bookcases into an Adapter
         // so it can be bound to the view
         //
-        bookcaseNames = bookcaseNameRespository.getAll();
+        List<String> bookcaseNames = mBookcaseNameRepository.getAll();
         ArrayAdapter<String> bookcaseNamesAdapter = new ArrayAdapter<>(
                 rootView.getContext(), android.R.layout.simple_list_item_1, bookcaseNames);
 
         // grab the view and give it something to show
         //
-        bookcasesListView = (ListView) rootView.findViewById(R.id.bookcases_listView);
+        final ListView bookcasesListView = (ListView) rootView.findViewById(R.id.bookcases_listView);
         bookcasesListView.setAdapter(bookcaseNamesAdapter);
 
         // handle tap/click on an item
@@ -61,10 +82,7 @@ public class BookcaseMasterActivityFragment extends InjectableFragment {
                 // and send it to the detail activity
                 //
                 String item = (String) bookcasesListView.getItemAtPosition(position);
-                Intent intent = new Intent(view.getContext(), BookcaseDetailActivity.class);
-                intent.putExtra("item", item);
-
-                startActivity(intent);
+                mBookcaseSelectedListener.onBookcaseSelected(item);
             }
         });
 
@@ -73,16 +91,26 @@ public class BookcaseMasterActivityFragment extends InjectableFragment {
         //
         return rootView;
     }
-//
-//    /**
-//     * Called when this fragment is first attached to an {@link android.app.Activity}.
-//     * Injects the fragment with its dependencies.
-//     *
-//     * @param context   The application context of the fragment.
-//     */
-//    @Override
-//    public void onAttach(Context context) {
-//        AndroidInjection.inject(this);
-//        super.onAttach(context);
-//    }
+
+    /**
+     * Called when the fragment is attached to a context.
+     *
+     * @param context The {@link Context} to which the fragment is being attached.
+     */
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+
+        // containing activity needs to implement the listener interface
+        // so it can be told when the user selects a bookcase
+        //
+        if (!(context instanceof OnBookcaseSelectedListener)) {
+            throw new ClassCastException(context.toString()
+                    + " must implement BookcaseMasterActivityFragment.OnBookcaseSelectedListener");
+        }
+
+        // grab the interface for later use
+        //
+        mBookcaseSelectedListener = (OnBookcaseSelectedListener) context;
+    }
 }
