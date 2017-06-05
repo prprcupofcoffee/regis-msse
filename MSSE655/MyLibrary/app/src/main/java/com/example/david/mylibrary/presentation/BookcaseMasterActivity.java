@@ -1,5 +1,6 @@
 package com.example.david.mylibrary.presentation;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,9 +15,9 @@ import com.example.david.mylibrary.persistence.StringRepository;
 
 import javax.inject.Inject;
 
-public class BookcaseMasterActivity extends InjectableAppCompatActivity {
+public class BookcaseMasterActivity extends InjectableAppCompatActivity implements BookcaseMasterActivityFragment.OnBookcaseSelectedListener {
     @Inject
-    StringRepository bookcaseRepository;
+    StringRepository mBookcaseRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +31,8 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, String.format("There are %d items in the repository.", bookcaseRepository.getAll().size()), Snackbar.LENGTH_LONG)
+                getSupportActionBar().show();
+                Snackbar.make(view, String.format("There are %d items in the repository.", mBookcaseRepository.getAll().size()), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });
@@ -43,6 +45,13 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity {
         return true;
     }
 
+    /**
+     * Called when an item in the options menu or action bar is selected.
+     *
+     * @param item  The {@link MenuItem} that was selected.
+     * @return      {@code true} to indicate the selection was processed;
+     *              {@code false} to allow normal menu processing to continue
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -50,11 +59,45 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        switch (id) {
+            case R.id.action_hideactionbar:
+                getSupportActionBar().hide();
+                return true;
+
+            case R.id.action_settings:
+                return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Announces that a bookcase has been selected.
+     *
+     * @param bookcaseName The name of the bookcase that was selected.
+     */
+    @Override
+    public void onBookcaseSelected(String bookcaseName) {
+
+        // locate the detail fragment
+        //
+        BookcaseDetailActivityFragment fragment = (BookcaseDetailActivityFragment) getFragmentManager()
+                .findFragmentById(R.id.fragment_bookcasedetail);
+
+        // if it's here, update it with the new bookcase selection
+        //
+        if (fragment != null) {
+            fragment.onSelectedBookcaseChanged(bookcaseName);
+        }
+
+        // otherwise, call out to the detail activity with the
+        // selection
+        //
+        else {
+            Intent intent = new Intent(this.getBaseContext(), BookcaseDetailActivity.class);
+            intent.putExtra("item", bookcaseName);
+
+            startActivity(intent);
+        }
     }
 }

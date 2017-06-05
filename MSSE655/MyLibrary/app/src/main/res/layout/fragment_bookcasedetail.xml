@@ -8,10 +8,9 @@
     tools:showIn="@layout/activity_bookcasedetail">
 
     <TextView
+        style="@style/MyLibraryTheme.FillParent.BookcaseDetailsTextColor"
         android:id="@+id/detail_text"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Text Here"
+        android:text="@string/bookcasedetail_nobookcaseselected"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"/>
