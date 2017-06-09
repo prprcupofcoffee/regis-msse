@@ -4,4 +4,11 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_bookcasedetail">Bookcase Details</string>
     <string name="bookcasedetail_nobookcaseselected">(No bookcase selected)</string>
+    <string name="navdrawer_open">open drawer</string>
+    <string name="navdrawer_close">close drawer</string>
+    <string-array name="navdrawer_items">
+        <item>Bookcases</item>
+        <item>Books</item>
+        <item>Settings</item>
+    </string-array>
 </resources>

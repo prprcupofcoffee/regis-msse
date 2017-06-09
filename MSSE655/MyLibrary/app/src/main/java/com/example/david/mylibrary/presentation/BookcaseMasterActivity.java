@@ -1,13 +1,22 @@
 package com.example.david.mylibrary.presentation;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.david.mylibrary.R;
 import com.example.david.mylibrary.application.InjectableAppCompatActivity;
@@ -18,6 +27,17 @@ import javax.inject.Inject;
 public class BookcaseMasterActivity extends InjectableAppCompatActivity implements BookcaseMasterActivityFragment.OnBookcaseSelectedListener {
     @Inject
     StringRepository mBookcaseRepository;
+
+    private String[] mPlanetTitles;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
+    private ActionBarDrawerToggle mActionBarDrawerToggle;
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mActionBarDrawerToggle.onConfigurationChanged(newConfig);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +56,46 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity implemen
                         .setAction("Action", null).show();
             }
         });
+
+        mPlanetTitles = getResources().getStringArray(R.array.navdrawer_items);
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+
+        // Set the adapter for the list view
+        mDrawerList.setAdapter(new ArrayAdapter<>(this,
+                R.layout.drawer_list_item, mPlanetTitles));
+        // Set the list's click listener
+        mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(view.getContext(), ((TextView) view).getText(), Toast.LENGTH_LONG).show();
+                mDrawerLayout.closeDrawer(mDrawerList);
+            }
+        });
+
+        mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.navdrawer_open, R.string.navdrawer_close) {
+            public void onDrawerClosed(View view) {
+                super.onDrawerClosed(view);
+                if (getActionBar() != null)
+                    getActionBar().setTitle("One");
+                invalidateOptionsMenu();
+            }
+
+            public void onDrawerOpened(View view) {
+                super.onDrawerOpened(view);
+                if (getActionBar() != null)
+                    getActionBar().setTitle("Two");
+                invalidateOptionsMenu();
+            }
+        };
+        mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeButtonEnabled(true);
+        }
     }
 
     @Override
@@ -59,6 +119,9 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity implemen
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        if (mActionBarDrawerToggle.onOptionsItemSelected(item))
+            return true;
+
         switch (id) {
             case R.id.action_hideactionbar:
                 getSupportActionBar().hide();
@@ -69,6 +132,12 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity implemen
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        mActionBarDrawerToggle.syncState();
     }
 
     /**
