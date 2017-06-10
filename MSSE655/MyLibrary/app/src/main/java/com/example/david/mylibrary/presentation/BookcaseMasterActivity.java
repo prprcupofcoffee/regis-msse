@@ -28,7 +28,7 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity implemen
     @Inject
     StringRepository mBookcaseRepository;
 
-    private String[] mPlanetTitles;
+    private String[] mNavDrawerItems;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
@@ -57,13 +57,13 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity implemen
             }
         });
 
-        mPlanetTitles = getResources().getStringArray(R.array.navdrawer_items);
+        mNavDrawerItems = getResources().getStringArray(R.array.navdrawer_items);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         // Set the adapter for the list view
         mDrawerList.setAdapter(new ArrayAdapter<>(this,
-                R.layout.drawer_list_item, mPlanetTitles));
+                R.layout.drawer_list_item, mNavDrawerItems));
         // Set the list's click listener
         mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
 
@@ -89,7 +89,7 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity implemen
                 invalidateOptionsMenu();
             }
         };
-        mDrawerLayout.setDrawerListener(mActionBarDrawerToggle);
+        mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
