@@ -8,7 +8,7 @@
     tools:showIn="@layout/activity_bookcasemaster">
 
     <ListView
-        android:id="@+id/bookcases_listView"
+        android:id="@id/android:list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hello World!"

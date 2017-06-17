@@ -5,12 +5,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.example.david.mylibrary.R;
-import com.example.david.mylibrary.application.InjectableFragment;
+import com.example.david.mylibrary.application.InjectableListFragment;
 import com.example.david.mylibrary.persistence.StringRepository;
 
 import java.util.List;
@@ -20,7 +19,7 @@ import javax.inject.Inject;
 /**
  * A fragment containing a simple view displaying a list of bookcases.
  */
-public class BookcaseMasterActivityFragment extends InjectableFragment {
+public class BookcaseMasterActivityFragment extends InjectableListFragment {
 
     /**
      * Interface definition for a callback to be invoked
@@ -67,24 +66,9 @@ public class BookcaseMasterActivityFragment extends InjectableFragment {
         ArrayAdapter<String> bookcaseNamesAdapter = new ArrayAdapter<>(
                 rootView.getContext(), android.R.layout.simple_list_item_1, bookcaseNames);
 
-        // grab the view and give it something to show
+        // give the list something to show
         //
-        final ListView bookcasesListView = (ListView) rootView.findViewById(R.id.bookcases_listView);
-        bookcasesListView.setAdapter(bookcaseNamesAdapter);
-
-        // handle tap/click on an item
-        //
-        bookcasesListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-                // get the entry at the indicated position
-                // and send it to the detail activity
-                //
-                String item = (String) bookcasesListView.getItemAtPosition(position);
-                mBookcaseSelectedListener.onBookcaseSelected(item);
-            }
-        });
+        setListAdapter(bookcaseNamesAdapter);
 
         // provide the instantiated and initialized fragment
         // and its child views
@@ -112,5 +96,23 @@ public class BookcaseMasterActivityFragment extends InjectableFragment {
         // grab the interface for later use
         //
         mBookcaseSelectedListener = (OnBookcaseSelectedListener) context;
+    }
+
+    /**
+     * Called when an item in the list is selected.
+     *
+     * @param l         The {@link ListView} where the click happened
+     * @param v         The {@link View} that was clicked within the ListView
+     * @param position  The position of the view in the list
+     * @param id        The row ID of the item that was clicked
+     */
+    @Override
+    public void onListItemClick(ListView l, View v, int position, long id) {
+
+        // get the entry at the indicated position
+        // and send it to the detail activity
+        //
+        String item = (String) getListView().getItemAtPosition(position);
+        mBookcaseSelectedListener.onBookcaseSelected(item);
     }
 }

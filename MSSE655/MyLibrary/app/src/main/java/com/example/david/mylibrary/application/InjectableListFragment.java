@@ -1,17 +1,19 @@
 package com.example.david.mylibrary.application;
 
-import android.app.Fragment;
+import android.app.ListFragment;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.ListView;
 
 import dagger.android.AndroidInjection;
 
 /**
- * Facilitates injection of dependencies into {@link Fragment} objects.
+ * Facilitates injection of dependencies into {@link ListFragment} objects.
  * Ensures the injector is invoked at the proper lifecycle step.
  */
 
-public class InjectableFragment extends Fragment {
+public class InjectableListFragment extends ListFragment {
 
     /**
      * Called when this fragment is first attached to an {@link android.app.Activity}.

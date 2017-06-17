@@ -61,10 +61,12 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity implemen
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
-        // Set the adapter for the list view
-        mDrawerList.setAdapter(new ArrayAdapter<>(this,
-                R.layout.drawer_list_item, mNavDrawerItems));
-        // Set the list's click listener
+        // give the navigation drawer some content
+        //
+        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, mNavDrawerItems));
+
+        // act on selections made from the navigation drawer
+        //
         mDrawerList.setOnItemClickListener(new ListView.OnItemClickListener() {
 
             @Override
@@ -74,23 +76,25 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity implemen
             }
         });
 
+        // refresh the options menu when the navigation drawer
+        // is opened and closed
+        //
         mActionBarDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.navdrawer_open, R.string.navdrawer_close) {
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                if (getActionBar() != null)
-                    getActionBar().setTitle("One");
                 invalidateOptionsMenu();
             }
 
             public void onDrawerOpened(View view) {
                 super.onDrawerOpened(view);
-                if (getActionBar() != null)
-                    getActionBar().setTitle("Two");
                 invalidateOptionsMenu();
             }
         };
         mDrawerLayout.addDrawerListener(mActionBarDrawerToggle);
 
+        // ensure the hamburger icon is displayed so there is
+        // a touch point to open the navigation drawer
+        //
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -117,10 +121,11 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity implemen
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
         if (mActionBarDrawerToggle.onOptionsItemSelected(item))
             return true;
+
+        int id = item.getItemId();
 
         switch (id) {
             case R.id.action_hideactionbar:
@@ -137,6 +142,11 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity implemen
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
         super.onPostCreate(savedInstanceState);
+
+        // once the layout has been fully realized,
+        // make sure the navigation drawer listener
+        // is aware of the drawer's open state
+        //
         mActionBarDrawerToggle.syncState();
     }
 
