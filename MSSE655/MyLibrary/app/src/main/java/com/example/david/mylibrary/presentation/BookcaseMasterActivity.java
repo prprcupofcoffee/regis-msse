@@ -20,14 +20,14 @@ import android.widget.Toast;
 
 import com.example.david.mylibrary.R;
 import com.example.david.mylibrary.application.InjectableAppCompatActivity;
+import com.example.david.mylibrary.business.BookcaseService;
 import com.example.david.mylibrary.domain.Bookcase;
-import com.example.david.mylibrary.persistence.BookcaseRepository;
 
 import javax.inject.Inject;
 
 public class BookcaseMasterActivity extends InjectableAppCompatActivity implements BookcaseMasterActivityFragment.OnBookcaseSelectedListener {
     @Inject
-    BookcaseRepository mBookcaseRepository;
+    BookcaseService mBookcaseService;
 
     private String[] mNavDrawerItems;
     private DrawerLayout mDrawerLayout;
@@ -53,7 +53,7 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity implemen
             @Override
             public void onClick(View view) {
                 getSupportActionBar().show();
-                Snackbar.make(view, String.format("There are %d items in the repository.", mBookcaseRepository.getAll().size()), Snackbar.LENGTH_LONG)
+                Snackbar.make(view, String.format("There are %d items in the repository.", mBookcaseService.retrieveAll().size()), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

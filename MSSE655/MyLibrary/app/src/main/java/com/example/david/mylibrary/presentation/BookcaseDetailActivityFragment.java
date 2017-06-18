@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.example.david.mylibrary.R;
 import com.example.david.mylibrary.application.InjectableFragment;
+import com.example.david.mylibrary.business.BookcaseService;
 import com.example.david.mylibrary.domain.Bookcase;
 import com.example.david.mylibrary.persistence.BookcaseRepository;
 
@@ -25,10 +26,10 @@ public class BookcaseDetailActivityFragment extends InjectableFragment {
     //
     TextView mBookcaseDetailsView;
 
-    // source for bookcase names
+    // source for bookcase information
     //
     @Inject
-    BookcaseRepository mBookcaseNameRepository;
+    BookcaseService mBookcaseService;
 
     /**
      * Callback method to be invoked when a bookcase has been

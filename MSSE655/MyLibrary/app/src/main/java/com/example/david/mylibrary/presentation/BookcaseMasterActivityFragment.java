@@ -10,8 +10,8 @@ import android.widget.ListView;
 
 import com.example.david.mylibrary.R;
 import com.example.david.mylibrary.application.InjectableListFragment;
+import com.example.david.mylibrary.business.BookcaseService;
 import com.example.david.mylibrary.domain.Bookcase;
-import com.example.david.mylibrary.persistence.BookcaseRepository;
 
 import java.util.List;
 
@@ -39,10 +39,10 @@ public class BookcaseMasterActivityFragment extends InjectableListFragment {
 
     OnBookcaseSelectedListener mBookcaseSelectedListener;
 
-    // source for bookcase names
+    // source for bookcase information
     //
     @Inject
-    BookcaseRepository mBookcaseNameRepository;
+    BookcaseService mBookcaseService;
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -63,7 +63,7 @@ public class BookcaseMasterActivityFragment extends InjectableListFragment {
         // load the names of the available bookcases into an Adapter
         // so it can be bound to the view
         //
-        List<Bookcase> bookcaseNames = mBookcaseNameRepository.getAll();
+        List<Bookcase> bookcaseNames = mBookcaseService.retrieveAll();
         ArrayAdapter<Bookcase> bookcaseNamesAdapter = new ArrayAdapter<>(
                 rootView.getContext(), android.R.layout.simple_list_item_1, bookcaseNames);
 
