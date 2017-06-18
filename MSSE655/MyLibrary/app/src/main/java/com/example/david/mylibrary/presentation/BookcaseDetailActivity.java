@@ -18,6 +18,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.david.mylibrary.R;
+import com.example.david.mylibrary.domain.Bookcase;
 
 public class BookcaseDetailActivity extends AppCompatActivity {
 
@@ -69,9 +70,9 @@ public class BookcaseDetailActivity extends AppCompatActivity {
             // get the item that was selected from the intent
             // that started the activity
             //
-            String bookcaseName = getIntent().getStringExtra("item");
+            Bookcase bookcase = (Bookcase) getIntent().getSerializableExtra("item");
 
-            fragment.onSelectedBookcaseChanged(bookcaseName);
+            fragment.onSelectedBookcaseChanged(bookcase);
         }
 
         mNavDrawerItems = getResources().getStringArray(R.array.navdrawer_items);

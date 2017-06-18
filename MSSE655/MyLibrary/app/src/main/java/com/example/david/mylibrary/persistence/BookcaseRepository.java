@@ -11,11 +11,11 @@ import java.util.List;
 import javax.inject.Inject;
 
 /**
- * Provides a {@link StringRepository} based on a static
- * set of strings.
+ * Provides a repository of {@link Bookcase} objects based on a static
+ * set of instances.
  */
 
-public class BookcaseRepository /*implements StringRepository*/ {
+public class BookcaseRepository {
     private final Context mContext;
 
     @Inject
@@ -32,25 +32,7 @@ public class BookcaseRepository /*implements StringRepository*/ {
     /**
      * Fetch all available bookcase names.
      */
-    public List<String> getAll() {
-        List<String> bookcaseNames = new ArrayList<>();
-
-        for (Bookcase b : bookcases) {
-            bookcaseNames.add(b.getName());
-        }
-
-        return bookcaseNames;
-    }
-
-    /**
-     * Provide additional information about a named bookcase.
-     */
-    public String getAdditionalInfo(String item) {
-        for (Bookcase b : bookcases) {
-            if (item.equals(b.getName()))
-                return String.format("%d books", b.getBookCount());
-        }
-
-        return "";
+    public List<Bookcase> getAll() {
+        return bookcases;
     }
 }

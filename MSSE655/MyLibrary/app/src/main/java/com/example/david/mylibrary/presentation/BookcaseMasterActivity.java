@@ -20,13 +20,14 @@ import android.widget.Toast;
 
 import com.example.david.mylibrary.R;
 import com.example.david.mylibrary.application.InjectableAppCompatActivity;
-import com.example.david.mylibrary.persistence.StringRepository;
+import com.example.david.mylibrary.domain.Bookcase;
+import com.example.david.mylibrary.persistence.BookcaseRepository;
 
 import javax.inject.Inject;
 
 public class BookcaseMasterActivity extends InjectableAppCompatActivity implements BookcaseMasterActivityFragment.OnBookcaseSelectedListener {
     @Inject
-    StringRepository mBookcaseRepository;
+    BookcaseRepository mBookcaseRepository;
 
     private String[] mNavDrawerItems;
     private DrawerLayout mDrawerLayout;
@@ -153,10 +154,10 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity implemen
     /**
      * Announces that a bookcase has been selected.
      *
-     * @param bookcaseName The name of the bookcase that was selected.
+     * @param bookcase The {@link Bookcase} that was selected.
      */
     @Override
-    public void onBookcaseSelected(String bookcaseName) {
+    public void onBookcaseSelected(Bookcase bookcase) {
 
         // locate the detail fragment
         //
@@ -166,7 +167,7 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity implemen
         // if it's here, update it with the new bookcase selection
         //
         if (fragment != null) {
-            fragment.onSelectedBookcaseChanged(bookcaseName);
+            fragment.onSelectedBookcaseChanged(bookcase);
         }
 
         // otherwise, call out to the detail activity with the
@@ -174,7 +175,7 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity implemen
         //
         else {
             Intent intent = new Intent(this.getBaseContext(), BookcaseDetailActivity.class);
-            intent.putExtra("item", bookcaseName);
+            intent.putExtra("item", bookcase);
 
             startActivity(intent);
         }

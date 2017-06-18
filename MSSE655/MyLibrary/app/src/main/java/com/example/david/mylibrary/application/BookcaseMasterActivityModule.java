@@ -3,6 +3,7 @@ package com.example.david.mylibrary.application;
 import android.app.Activity;
 import android.content.Context;
 
+import com.example.david.mylibrary.domain.Bookcase;
 import com.example.david.mylibrary.persistence.BookcaseRepository;
 import com.example.david.mylibrary.persistence.StringRepository;
 import com.example.david.mylibrary.presentation.BookcaseMasterActivity;
@@ -31,7 +32,7 @@ public abstract class BookcaseMasterActivityModule {
         bindBookcaseMasterActivityInjectorFactory(BookcaseMasterActivitySubcomponent.Builder builder);
 
     @Provides @Singleton
-    public static StringRepository provideStringRepository(Context context) {
+    public static BookcaseRepository provideBookcaseRepository(Context context) {
         return new BookcaseRepository(context);
     }
 }

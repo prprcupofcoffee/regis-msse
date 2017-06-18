@@ -1,5 +1,6 @@
 package com.example.david.mylibrary;
 
+import com.example.david.mylibrary.domain.Bookcase;
 import com.example.david.mylibrary.persistence.BookcaseRepository;
 import com.example.david.mylibrary.persistence.StringRepository;
 
@@ -20,11 +21,11 @@ public class RepositoryTests {
 
         // Arrange
         //
-        StringRepository sut = new BookcaseRepository(null);
+        BookcaseRepository sut = new BookcaseRepository(null);
 
         // Act
         //
-        List<String> values = sut.getAll();
+        List<Bookcase> values = sut.getAll();
 
         // Assert
         //

@@ -8,7 +8,10 @@ import android.widget.TextView;
 
 import com.example.david.mylibrary.R;
 import com.example.david.mylibrary.application.InjectableFragment;
-import com.example.david.mylibrary.persistence.StringRepository;
+import com.example.david.mylibrary.domain.Bookcase;
+import com.example.david.mylibrary.persistence.BookcaseRepository;
+
+import java.util.Locale;
 
 import javax.inject.Inject;
 
@@ -25,26 +28,23 @@ public class BookcaseDetailActivityFragment extends InjectableFragment {
     // source for bookcase names
     //
     @Inject
-    StringRepository mBookcaseNameRepository;
+    BookcaseRepository mBookcaseNameRepository;
 
     /**
      * Callback method to be invoked when a bookcase has been
      * selected in another view.
      *
-     * @param bookcaseName The name of the bookcase that was selected.
+     * @param bookcase The {@link Bookcase} bookcase that was selected.
      */
-    public void onSelectedBookcaseChanged(String bookcaseName) {
+    public void onSelectedBookcaseChanged(Bookcase bookcase) {
 
-        // find additional information about the item, if any
+        // construct the information to display
         //
-        String additionalInfo = mBookcaseNameRepository.getAdditionalInfo(bookcaseName);
-        if (additionalInfo != null && additionalInfo.length() > 0) {
-            bookcaseName = String.format("%s (%s)", bookcaseName, additionalInfo);
-        }
+        String bookcaseInfo = String.format(Locale.getDefault(), "%s (%s books)", bookcase.getName(), bookcase.getBookCount());
 
         // show something in the UI
         //
-        mBookcaseDetailsView.setText(bookcaseName);
+        mBookcaseDetailsView.setText(bookcaseInfo);
     }
 
     /**

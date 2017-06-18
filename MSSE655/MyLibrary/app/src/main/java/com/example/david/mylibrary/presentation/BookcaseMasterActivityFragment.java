@@ -10,7 +10,8 @@ import android.widget.ListView;
 
 import com.example.david.mylibrary.R;
 import com.example.david.mylibrary.application.InjectableListFragment;
-import com.example.david.mylibrary.persistence.StringRepository;
+import com.example.david.mylibrary.domain.Bookcase;
+import com.example.david.mylibrary.persistence.BookcaseRepository;
 
 import java.util.List;
 
@@ -31,9 +32,9 @@ public class BookcaseMasterActivityFragment extends InjectableListFragment {
          * Callback method to be invoked when a bookcase has been
          * selected in another view.
          *
-         * @param bookcaseName The name of the bookcase that was selected.
+         * @param bookcase  The {@link Bookcase} that was selected.
          */
-        public void onBookcaseSelected(String bookcaseName);
+        public void onBookcaseSelected(Bookcase bookcase);
     }
 
     OnBookcaseSelectedListener mBookcaseSelectedListener;
@@ -41,7 +42,7 @@ public class BookcaseMasterActivityFragment extends InjectableListFragment {
     // source for bookcase names
     //
     @Inject
-    StringRepository mBookcaseNameRepository;
+    BookcaseRepository mBookcaseNameRepository;
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -62,8 +63,8 @@ public class BookcaseMasterActivityFragment extends InjectableListFragment {
         // load the names of the available bookcases into an Adapter
         // so it can be bound to the view
         //
-        List<String> bookcaseNames = mBookcaseNameRepository.getAll();
-        ArrayAdapter<String> bookcaseNamesAdapter = new ArrayAdapter<>(
+        List<Bookcase> bookcaseNames = mBookcaseNameRepository.getAll();
+        ArrayAdapter<Bookcase> bookcaseNamesAdapter = new ArrayAdapter<>(
                 rootView.getContext(), android.R.layout.simple_list_item_1, bookcaseNames);
 
         // give the list something to show
@@ -112,7 +113,7 @@ public class BookcaseMasterActivityFragment extends InjectableListFragment {
         // get the entry at the indicated position
         // and send it to the detail activity
         //
-        String item = (String) getListView().getItemAtPosition(position);
+        Bookcase item = (Bookcase) getListView().getItemAtPosition(position);
         mBookcaseSelectedListener.onBookcaseSelected(item);
     }
 }

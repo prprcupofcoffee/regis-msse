@@ -1,11 +1,13 @@
 package com.example.david.mylibrary.domain;
 
+import java.io.Serializable;
+
 /**
  * Models a bookcase, with attributes such as name,
  * location, and number of books.
  */
 
-public class Bookcase {
+public class Bookcase implements Serializable {
     private int mBookCount;
     private String mLocation;
     private String mName;
@@ -14,6 +16,11 @@ public class Bookcase {
         mName = name;
         mLocation = location;
         mBookCount = bookCount;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 
     public int getBookCount() {
