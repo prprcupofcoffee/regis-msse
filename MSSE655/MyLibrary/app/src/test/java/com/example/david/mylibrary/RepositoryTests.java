@@ -20,7 +20,7 @@ public class RepositoryTests {
 
         // Arrange
         //
-        StringRepository sut = new BookcaseRepository();
+        StringRepository sut = new BookcaseRepository(null);
 
         // Act
         //

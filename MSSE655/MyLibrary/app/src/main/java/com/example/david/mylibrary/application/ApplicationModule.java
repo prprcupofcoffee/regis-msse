@@ -19,13 +19,9 @@ import dagger.multibindings.IntoMap;
 
 /**
  * This is a Dagger module. It provides implementations of injectables.
- *
- * It provides a builder method connecting
- * the activity with its injector.
  */
 @Module
-@Singleton
-public abstract class ApplicationModule {
+public class ApplicationModule {
     private final Context mContext;
 
     public ApplicationModule(Context context) {
@@ -33,7 +29,6 @@ public abstract class ApplicationModule {
     }
 
     @Provides
-    @Singleton
     public Context provideContext() {
         return mContext;
     }

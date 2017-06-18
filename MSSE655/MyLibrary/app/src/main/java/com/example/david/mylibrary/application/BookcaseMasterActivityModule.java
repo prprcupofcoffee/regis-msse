@@ -24,12 +24,6 @@ import dagger.multibindings.IntoMap;
  */
 @Module(subcomponents = BookcaseMasterActivitySubcomponent.class)
 public abstract class BookcaseMasterActivityModule {
-    private final Context context;
-
-    public BookcaseMasterActivityModule(Context context) {
-        this.context = context;
-    }
-
     @Binds
     @IntoMap
     @ActivityKey(BookcaseMasterActivity.class)
@@ -37,7 +31,7 @@ public abstract class BookcaseMasterActivityModule {
         bindBookcaseMasterActivityInjectorFactory(BookcaseMasterActivitySubcomponent.Builder builder);
 
     @Provides @Singleton
-    public static StringRepository provideStringRepository() {
-        return new BookcaseRepository();
+    public static StringRepository provideStringRepository(Context context) {
+        return new BookcaseRepository(context);
     }
 }
