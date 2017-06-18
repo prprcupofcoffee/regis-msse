@@ -6,10 +6,15 @@ package com.example.david.mylibrary.domain;
  */
 
 public class Bookcase {
-
     private int mBookCount;
     private String mLocation;
     private String mName;
+
+    public Bookcase(String name, String location, int bookCount) {
+        mName = name;
+        mLocation = location;
+        mBookCount = bookCount;
+    }
 
     public int getBookCount() {
         return mBookCount;
