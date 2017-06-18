@@ -1,7 +1,11 @@
 package com.example.david.mylibrary.persistence;
 
+import android.content.Context;
+
 import java.util.Arrays;
 import java.util.List;
+
+import javax.inject.Inject;
 
 /**
  * Provides a {@link StringRepository} based on a static
@@ -9,6 +13,8 @@ import java.util.List;
  */
 
 public class BookcaseRepository implements StringRepository {
+    @Inject
+    Context mContext;
 
     private static final List<String> bookcaseNames = Arrays.asList(
             "Bookcase 1",

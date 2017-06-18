@@ -2,6 +2,7 @@ package com.example.david.mylibrary.application;
 
 import android.app.Activity;
 import android.content.Context;
+import android.renderscript.RSInvalidStateException;
 
 import com.example.david.mylibrary.persistence.BookcaseRepository;
 import com.example.david.mylibrary.persistence.StringRepository;
@@ -22,22 +23,18 @@ import dagger.multibindings.IntoMap;
  * It provides a builder method connecting
  * the activity with its injector.
  */
-@Module(subcomponents = BookcaseMasterActivitySubcomponent.class)
-public abstract class BookcaseMasterActivityModule {
-    private final Context context;
+@Module
+@Singleton
+public abstract class ApplicationModule {
+    private final Context mContext;
 
-    public BookcaseMasterActivityModule(Context context) {
-        this.context = context;
+    public ApplicationModule(Context context) {
+        this.mContext = context;
     }
 
-    @Binds
-    @IntoMap
-    @ActivityKey(BookcaseMasterActivity.class)
-    abstract AndroidInjector.Factory<? extends Activity>
-        bindBookcaseMasterActivityInjectorFactory(BookcaseMasterActivitySubcomponent.Builder builder);
-
-    @Provides @Singleton
-    public static StringRepository provideStringRepository() {
-        return new BookcaseRepository();
+    @Provides
+    @Singleton
+    public Context provideContext() {
+        return mContext;
     }
 }

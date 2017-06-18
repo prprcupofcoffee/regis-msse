@@ -1,5 +1,7 @@
 package com.example.david.mylibrary.application;
 
+import com.example.david.mylibrary.persistence.BookcaseRepository;
+
 import javax.inject.Singleton;
 
 import dagger.Component;
@@ -12,6 +14,7 @@ import dagger.android.AndroidInjectionModule;
 @Singleton
 @Component(modules = {
         AndroidInjectionModule.class,
+        ApplicationModule.class,
         BookcaseMasterActivityModule.class,
         BookcaseMasterActivityFragmentModule.class,
         BookcaseDetailActivityModule.class,
@@ -19,4 +22,5 @@ import dagger.android.AndroidInjectionModule;
 })
 public interface ApplicationComponent {
     void inject(MyLibraryApplication application);
+    void inject(BookcaseRepository bookcaseRepository);
 }
