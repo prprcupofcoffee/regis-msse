@@ -6,13 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.SimpleAdapter;
 
 import com.example.david.mylibrary.R;
 import com.example.david.mylibrary.application.InjectableListFragment;
 import com.example.david.mylibrary.business.BookcaseService;
 import com.example.david.mylibrary.domain.Bookcase;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -60,16 +64,9 @@ public class BookcaseMasterActivityFragment extends InjectableListFragment {
         //
         View rootView = inflater.inflate(R.layout.fragment_bookcasemaster, container, false);
 
-        // load the names of the available bookcases into an Adapter
-        // so it can be bound to the view
-        //
-        List<Bookcase> bookcaseNames = mBookcaseService.retrieveAll();
-        ArrayAdapter<Bookcase> bookcaseNamesAdapter = new ArrayAdapter<>(
-                rootView.getContext(), android.R.layout.simple_list_item_1, bookcaseNames);
-
         // give the list something to show
         //
-        setListAdapter(bookcaseNamesAdapter);
+        setListAdapter(createListAdapter(rootView.getContext()));
 
         // provide the instantiated and initialized fragment
         // and its child views
@@ -116,4 +113,40 @@ public class BookcaseMasterActivityFragment extends InjectableListFragment {
         Bookcase item = (Bookcase) getListView().getItemAtPosition(position);
         mBookcaseSelectedListener.onBookcaseSelected(item);
     }
+
+    /**
+     * Builds a {@link ListAdapter} around a list of {@link Bookcase} information.
+     *
+     * @param context   The context where the View associated with this SimpleAdapter is running
+     * @return          A {@link SimpleAdapter} containing data to display in a {@link ListView}
+     */
+    private ListAdapter createListAdapter(Context context) {
+
+        // load the names of the available bookcases into an Adapter
+        // so it can be bound to the view
+        //
+        List<Bookcase> bookcases = mBookcaseService.retrieveAll();
+
+        // map data to list of Maps where each entry in the list supplies
+        // data for one ListView entry
+        //
+        List<HashMap<String, String>> maps = new ArrayList<>();
+
+        for (Bookcase b : bookcases) {
+            HashMap<String, String> entry = new HashMap<>();
+            entry.put("name", String.format("Name: %s", b.getName()));
+            entry.put("location", String.format("Location: %s", b.getLocation()));
+            maps.add(entry);
+        }
+
+        // indicate correspondence between map keys and View IDs
+        //
+        String[] from = new String[] { "name", "location" };
+        int[] to = new int[] { android.R.id.text1, android.R.id.text2 };
+
+        // build a ListAdapter showing how to extract data from a Bookcase list
+        //
+        return new SimpleAdapter(context, maps, android.R.layout.simple_list_item_2, from, to);
+    }
+
 }
