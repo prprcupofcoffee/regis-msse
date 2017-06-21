@@ -18,6 +18,11 @@ public interface BookcaseService {
     public List<Bookcase> retrieveAll();
 
     /**
+     * Sends all {@link Bookcase} instances to persistent storage.
+     */
+    public void save();
+
+    /**
      * Adds a new {@link Bookcase} instance to the store.
      *
      * @param bookcase  The new {@link Bookcase} to be added

@@ -2,7 +2,6 @@ package com.example.david.mylibrary;
 
 import com.example.david.mylibrary.domain.Bookcase;
 import com.example.david.mylibrary.persistence.BookcaseRepository;
-import com.example.david.mylibrary.persistence.StringRepository;
 
 import org.junit.Test;
 

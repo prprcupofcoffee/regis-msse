@@ -7,7 +7,7 @@ import com.example.david.mylibrary.business.BookcaseService;
 import com.example.david.mylibrary.business.BookcaseServiceImpl;
 import com.example.david.mylibrary.domain.Bookcase;
 import com.example.david.mylibrary.persistence.BookcaseRepository;
-import com.example.david.mylibrary.persistence.StringRepository;
+import com.example.david.mylibrary.persistence.Repository;
 import com.example.david.mylibrary.presentation.BookcaseMasterActivity;
 
 import javax.inject.Singleton;
@@ -34,7 +34,7 @@ public abstract class BookcaseMasterActivityModule {
         bindBookcaseMasterActivityInjectorFactory(BookcaseMasterActivitySubcomponent.Builder builder);
 
     @Provides @Singleton
-    public static BookcaseRepository provideBookcaseRepository(Context context) {
+    public static Repository<Bookcase> provideBookcaseRepository(Context context) {
         return new BookcaseRepository(context);
     }
 

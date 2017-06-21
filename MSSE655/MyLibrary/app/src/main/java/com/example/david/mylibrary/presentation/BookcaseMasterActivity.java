@@ -29,7 +29,6 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity implemen
     @Inject
     BookcaseService mBookcaseService;
 
-    private String[] mNavDrawerItems;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mActionBarDrawerToggle;
@@ -58,13 +57,13 @@ public class BookcaseMasterActivity extends InjectableAppCompatActivity implemen
             }
         });
 
-        mNavDrawerItems = getResources().getStringArray(R.array.navdrawer_items);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
         // give the navigation drawer some content
         //
-        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, mNavDrawerItems));
+        String[] navDrawerItems = getResources().getStringArray(R.array.navdrawer_items);
+        mDrawerList.setAdapter(new ArrayAdapter<>(this, R.layout.drawer_list_item, navDrawerItems));
 
         // act on selections made from the navigation drawer
         //

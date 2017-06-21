@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -94,6 +93,20 @@ public class BookcaseMasterActivityFragment extends InjectableListFragment {
         // grab the interface for later use
         //
         mBookcaseSelectedListener = (OnBookcaseSelectedListener) context;
+    }
+
+    /**
+     * Called when the Fragment is no longer resumed.  This is generally
+     * tied to {@link Activity#onPause() Activity.onPause} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onPause() {
+        super.onPause();
+
+        // save any changed or added Bookcase instances
+        //
+        mBookcaseService.save();
     }
 
     /**

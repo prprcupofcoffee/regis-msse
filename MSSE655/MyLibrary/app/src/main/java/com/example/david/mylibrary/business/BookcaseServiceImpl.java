@@ -2,6 +2,7 @@ package com.example.david.mylibrary.business;
 
 import com.example.david.mylibrary.domain.Bookcase;
 import com.example.david.mylibrary.persistence.BookcaseRepository;
+import com.example.david.mylibrary.persistence.Repository;
 
 import java.util.List;
 
@@ -10,10 +11,11 @@ import java.util.List;
  */
 
 public class BookcaseServiceImpl implements BookcaseService {
-    private BookcaseRepository mBookcaseRepository;
+    private Repository<Bookcase> mBookcaseRepository;
 
     public BookcaseServiceImpl(BookcaseRepository repository) {
         mBookcaseRepository = repository;
+        mBookcaseRepository.loadAll();
     }
 
     /**
@@ -23,6 +25,13 @@ public class BookcaseServiceImpl implements BookcaseService {
      */
     public List<Bookcase> retrieveAll() {
         return mBookcaseRepository.getAll();
+    }
+
+    /**
+     * Sends all {@link Bookcase} instances to persistent storage.
+     */
+    public void save() {
+        mBookcaseRepository.storeAll();
     }
 
     /**
