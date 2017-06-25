@@ -1,7 +1,6 @@
-package com.example.david.mylibrary;
+package com.example.david.mylibrary.persistence;
 
 import com.example.david.mylibrary.domain.Bookcase;
-import com.example.david.mylibrary.persistence.BookcaseRepository;
 
 import org.junit.Test;
 
@@ -14,13 +13,13 @@ import static org.junit.Assert.*;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class RepositoryTests {
+public class SerializedBookcaseRepositoryTests {
     @Test
     public void repository_providesStrings() throws Exception {
 
         // Arrange
         //
-        BookcaseRepository sut = new BookcaseRepository(null);
+        SerializedBookcaseRepository sut = new SerializedBookcaseRepository(null);
 
         // Act
         //

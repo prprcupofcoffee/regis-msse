@@ -1,5 +1,7 @@
 package com.example.david.mylibrary.domain;
 
+import com.example.david.mylibrary.persistence.PersistableObject;
+
 import java.io.Serializable;
 
 /**
@@ -7,16 +9,11 @@ import java.io.Serializable;
  * location, and number of books.
  */
 
-public class Bookcase implements Serializable {
+public class Bookcase extends PersistableObject implements Serializable {
+    private int mId;
     private int mBookCount;
     private String mLocation;
     private String mName;
-
-    public Bookcase(String name, String location, int bookCount) {
-        mName = name;
-        mLocation = location;
-        mBookCount = bookCount;
-    }
 
     @Override
     public String toString() {
@@ -29,6 +26,14 @@ public class Bookcase implements Serializable {
 
     public void setBookCount(int value) {
         mBookCount = value;
+    }
+
+    public int getId() {
+        return mId;
+    }
+
+    public void setId(int value) {
+        mId = value;
     }
 
     public String getLocation() {

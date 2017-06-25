@@ -34,4 +34,6 @@ dependencies {
     compile "com.google.dagger:dagger-android:$DAGGER_VERSION"
     annotationProcessor "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
     androidTestCompile 'com.google.code.findbugs:jsr305:3.0.1'
+    testCompile "org.mockito:mockito-core:+"
+    androidTestCompile "org.mockito:mockito-android:+"
 }

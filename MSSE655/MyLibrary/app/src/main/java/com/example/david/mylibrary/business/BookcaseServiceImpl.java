@@ -1,7 +1,6 @@
 package com.example.david.mylibrary.business;
 
 import com.example.david.mylibrary.domain.Bookcase;
-import com.example.david.mylibrary.persistence.BookcaseRepository;
 import com.example.david.mylibrary.persistence.Repository;
 
 import java.util.List;
@@ -13,7 +12,7 @@ import java.util.List;
 public class BookcaseServiceImpl implements BookcaseService {
     private Repository<Bookcase> mBookcaseRepository;
 
-    public BookcaseServiceImpl(BookcaseRepository repository) {
+    public BookcaseServiceImpl(Repository repository) {
         mBookcaseRepository = repository;
         mBookcaseRepository.loadAll();
     }

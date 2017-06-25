@@ -6,8 +6,9 @@ import android.content.Context;
 import com.example.david.mylibrary.business.BookcaseService;
 import com.example.david.mylibrary.business.BookcaseServiceImpl;
 import com.example.david.mylibrary.domain.Bookcase;
-import com.example.david.mylibrary.persistence.BookcaseRepository;
+import com.example.david.mylibrary.persistence.MyLibrarySQLiteOpenHelper;
 import com.example.david.mylibrary.persistence.Repository;
+import com.example.david.mylibrary.persistence.SqliteBookcaseRepository;
 import com.example.david.mylibrary.presentation.BookcaseMasterActivity;
 
 import javax.inject.Singleton;
@@ -34,12 +35,17 @@ public abstract class BookcaseMasterActivityModule {
         bindBookcaseMasterActivityInjectorFactory(BookcaseMasterActivitySubcomponent.Builder builder);
 
     @Provides @Singleton
-    public static Repository<Bookcase> provideBookcaseRepository(Context context) {
-        return new BookcaseRepository(context);
+    public static MyLibrarySQLiteOpenHelper provideMyLibrarySQLiteOpenHelper(Context context) {
+        return new MyLibrarySQLiteOpenHelper(context);
     }
 
     @Provides @Singleton
-    public static BookcaseService provideBookcaseService(BookcaseRepository repository) {
+    public static Repository<Bookcase> provideBookcaseRepository(MyLibrarySQLiteOpenHelper helper) {
+        return new SqliteBookcaseRepository(helper);
+    }
+
+    @Provides @Singleton
+    public static BookcaseService provideBookcaseService(SqliteBookcaseRepository repository) {
         return new BookcaseServiceImpl(repository);
     }
 }

@@ -10,7 +10,6 @@ import com.example.david.mylibrary.R;
 import com.example.david.mylibrary.application.InjectableFragment;
 import com.example.david.mylibrary.business.BookcaseService;
 import com.example.david.mylibrary.domain.Bookcase;
-import com.example.david.mylibrary.persistence.BookcaseRepository;
 
 import java.util.Locale;
 

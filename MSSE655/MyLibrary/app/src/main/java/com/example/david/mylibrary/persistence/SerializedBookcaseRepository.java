@@ -20,13 +20,13 @@ import javax.inject.Inject;
  * set of instances.
  */
 
-public class BookcaseRepository implements Repository<Bookcase> {
+public class SerializedBookcaseRepository implements Repository<Bookcase> {
     private final String REPOSITORY_FILE = "mylibrary_bookcase_store";
     private final Context mContext;
     private List<Bookcase> mBookcases;
 
     @Inject
-    public BookcaseRepository(Context context) {
+    public SerializedBookcaseRepository(Context context) {
         mContext = context;
     }
 
@@ -53,9 +53,9 @@ public class BookcaseRepository implements Repository<Bookcase> {
         //
         catch (FileNotFoundException fnfe) {
             mBookcases = Arrays.asList(
-                    new Bookcase("Bookcase 1", "Upstairs", 127),
-                    new Bookcase("Bookcase 2", "Downstairs", 64),
-                    new Bookcase("Bookcase 3", "Den", 93)
+                    createBookcase(0, "Bookcase 1", "Upstairs", 127),
+                    createBookcase(1, "Bookcase 2", "Downstairs", 64),
+                    createBookcase(2, "Bookcase 3", "Den", 93)
             );
         }
 
@@ -106,5 +106,15 @@ public class BookcaseRepository implements Repository<Bookcase> {
         catch (Exception ioe) {
             // do nothing
         }
+    }
+
+    private Bookcase createBookcase(int id, String name, String location, int bookCount) {
+        Bookcase b = new Bookcase();
+        b.setId(id);
+        b.setName(name);
+        b.setLocation(location);
+        b.setBookCount(bookCount);
+
+        return b;
     }
 }

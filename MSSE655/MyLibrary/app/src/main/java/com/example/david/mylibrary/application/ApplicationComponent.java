@@ -1,8 +1,7 @@
 package com.example.david.mylibrary.application;
 
-import android.content.Context;
-
-import com.example.david.mylibrary.persistence.BookcaseRepository;
+import com.example.david.mylibrary.persistence.SerializedBookcaseRepository;
+import com.example.david.mylibrary.persistence.SqliteBookcaseRepository;
 
 import javax.inject.Singleton;
 
@@ -27,5 +26,6 @@ public interface ApplicationComponent {
     // Classes this component is responsible for injecting:
     //
     void inject(MyLibraryApplication application);
-    void inject(BookcaseRepository bookcaseRepository);
+    void inject(SerializedBookcaseRepository bookcaseRepository);
+    void inject(SqliteBookcaseRepository bookcaseRepository);
 }
