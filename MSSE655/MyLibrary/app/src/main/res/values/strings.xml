@@ -3,6 +3,9 @@
     <string name="action_hideactionbar">Hide ActionBar</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_bookcasedetail">Bookcase Details</string>
+    <string name="bookcasedetail_bookcountcaption">Number of books in bookcase</string>
+    <string name="bookcasedetail_locationcaption">Bookcase location</string>
+    <string name="bookcasedetail_namecaption">Bookcase name</string>
     <string name="bookcasedetail_nobookcaseselected">(No bookcase selected)</string>
     <string name="navdrawer_open">open drawer</string>
     <string name="navdrawer_close">close drawer</string>

@@ -1,17 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.example.david.mylibrary.presentation.BookcaseDetailActivityFragment"
     tools:showIn="@layout/activity_bookcasedetail">
 
     <TextView
-        style="@style/MyLibraryTheme.FillParent.BookcaseDetailsTextColor"
-        android:id="@+id/detail_text"
-        android:text="@string/bookcasedetail_nobookcaseselected"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"/>
-</RelativeLayout>
+        android:id="@+id/name_caption"
+        style="@style/MyLibraryTheme.BookcaseDetailsItemCaption"
+        android:text="@string/bookcasedetail_namecaption" />
+
+    <EditText
+        android:id="@+id/name_text"
+        style="@style/MyLibraryTheme.BookcaseDetailsItem"
+        android:text="@string/bookcasedetail_nobookcaseselected" />
+
+    <TextView
+        android:id="@+id/location_caption"
+        style="@style/MyLibraryTheme.BookcaseDetailsItemCaption"
+        android:text="@string/bookcasedetail_locationcaption" />
+
+    <EditText
+        android:id="@+id/location_text"
+        style="@style/MyLibraryTheme.BookcaseDetailsItem"/>
+
+    <TextView
+        android:id="@+id/bookcount_caption"
+        style="@style/MyLibraryTheme.BookcaseDetailsItemCaption"
+        android:text="@string/bookcasedetail_bookcountcaption" />
+
+    <TextView
+        android:id="@+id/bookcount_text"
+        style="@style/MyLibraryTheme.BookcaseDetailsItem"/>
+</LinearLayout>

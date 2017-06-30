@@ -123,8 +123,9 @@ public class BookcaseMasterActivityFragment extends InjectableListFragment {
         // get the entry at the indicated position
         // and send it to the detail activity
         //
-        Bookcase item = (Bookcase) getListView().getItemAtPosition(position);
-        mBookcaseSelectedListener.onBookcaseSelected(item);
+        HashMap<String, Object> item = (HashMap<String, Object>) getListView().getItemAtPosition(position);
+        Bookcase bookcase = (Bookcase) item.get("bookcase");
+        mBookcaseSelectedListener.onBookcaseSelected(bookcase);
     }
 
     /**
@@ -143,12 +144,13 @@ public class BookcaseMasterActivityFragment extends InjectableListFragment {
         // map data to list of Maps where each entry in the list supplies
         // data for one ListView entry
         //
-        List<HashMap<String, String>> maps = new ArrayList<>();
+        List<HashMap<String, Object>> maps = new ArrayList<>();
 
         for (Bookcase b : bookcases) {
-            HashMap<String, String> entry = new HashMap<>();
+            HashMap<String, Object> entry = new HashMap<>();
             entry.put("name", String.format("Name: %s", b.getName()));
             entry.put("location", String.format("Location: %s", b.getLocation()));
+            entry.put("bookcase", b);
             maps.add(entry);
         }
 

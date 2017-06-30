@@ -23,7 +23,9 @@ public class BookcaseDetailActivityFragment extends InjectableFragment {
 
     // view to update when the selected bookcase changes
     //
-    TextView mBookcaseDetailsView;
+    TextView mBookcaseNameTextView;
+    TextView mBookcaseLocationTextView;
+    TextView mBookcaseBookCountTextView;
 
     // source for bookcase information
     //
@@ -38,13 +40,11 @@ public class BookcaseDetailActivityFragment extends InjectableFragment {
      */
     public void onSelectedBookcaseChanged(Bookcase bookcase) {
 
-        // construct the information to display
+        // show details in the UI
         //
-        String bookcaseInfo = String.format(Locale.getDefault(), "%s (%s books)", bookcase.getName(), bookcase.getBookCount());
-
-        // show something in the UI
-        //
-        mBookcaseDetailsView.setText(bookcaseInfo);
+        mBookcaseNameTextView.setText(bookcase.getName());
+        mBookcaseLocationTextView.setText(bookcase.getLocation());
+        mBookcaseBookCountTextView.setText(String.valueOf(bookcase.getBookCount()));
     }
 
     /**
@@ -63,9 +63,11 @@ public class BookcaseDetailActivityFragment extends InjectableFragment {
         //
         View rootView = inflater.inflate(R.layout.fragment_bookcasedetail, container, false);
 
-        // obtain the view to be updated when the selected bookcase changes
+        // obtain the views to be updated when the selected bookcase changes
         //
-        mBookcaseDetailsView = (TextView) rootView.findViewById(R.id.detail_text);
+        mBookcaseNameTextView = (TextView) rootView.findViewById(R.id.name_text);
+        mBookcaseLocationTextView = (TextView) rootView.findViewById(R.id.location_text);
+        mBookcaseBookCountTextView = (TextView) rootView.findViewById(R.id.bookcount_text);
 
         // provide the instantiated fragment and its child views
         //
