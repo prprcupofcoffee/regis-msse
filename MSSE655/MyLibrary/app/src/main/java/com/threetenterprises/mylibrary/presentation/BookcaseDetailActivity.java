@@ -1,5 +1,6 @@
 package com.threetenterprises.mylibrary.presentation;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -89,7 +90,12 @@ public class BookcaseDetailActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(view.getContext(), ((TextView) view).getText(), Toast.LENGTH_LONG).show();
+                if (position == 0) {
+                    Intent intent = new Intent(view.getContext(), BookcaseMasterActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(view.getContext(), ((TextView) view).getText(), Toast.LENGTH_LONG).show();
+                }
                 mDrawerLayout.closeDrawer(mDrawerList);
             }
         });
