@@ -48,7 +48,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="16dp"
-            app:srcCompat="@android:drawable/ic_dialog_email" />
+            app:srcCompat="@drawable/ic_add_white_24dp" />
 
     </RelativeLayout>
 
