@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.david.mylibrary">
+    package="com.threetenterprises.mylibrary">
 
     <application
         android:name=".application.MyLibraryApplication"
@@ -27,7 +27,7 @@
             android:theme="@style/MyLibraryTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.david.mylibrary.presentation.BookcaseMasterActivity" />
+                android:value="com.threetenterprises.mylibrary.presentation.BookcaseMasterActivity" />
         </activity>
     </application>
 
