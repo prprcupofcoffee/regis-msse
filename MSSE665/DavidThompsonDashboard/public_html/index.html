@@ -12,32 +12,43 @@ and open the template in the editor.
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
         <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+        <script src="js/flotr2.min.js"></script>
         <script type='text/javascript'>
             var kpi1data;
             var kpi2data;
             var kpi3data;
             var kpi4data;
 
+            function showAlert(message) {
+                if (!message)
+                    $('#alert').hide();
+                else
+                    $('#alert').html(message).show();
+            }
             function clearKPIs() {
-                $('#alert').hide();
+                showAlert();
             }
             function flotr2() {
-                $('#alert').html('Flotr2 is not implemented yet!').show();
+                showAlert();
+                
+                var kpi1div = document.getElementById('KPI1');
+                //var kpi1div = $('KPI1s')[0];
+                Flotr.draw(kpi1div, kpi1data);
             }
             function chartjs() {
-                $('#alert').html('ChartJS is not implemented yet!').show();
+                showAlert('ChartJS is not implemented yet!');
             }
             function chartist() {
-                $('#alert').html('Chartist is not implemented yet!').show();
+                showAlert('Chartist is not implemented yet!');
             }
             function google() {
-                $('#alert').html('Google Charts is not implemented yet!').show();
+                showAlert('Google Charts is not implemented yet!');
             }
             function d3() {
-                $('#alert').html('D3 is not implemented yet!').show();
+                showAlert('D3 is not implemented yet!');
             }
             function leaflet() {
-                $('#alert').html('Leaflet is not implemented yet!').show();
+                showAlert('Leaflet is not implemented yet!');
             }
             
             $(function() {
@@ -51,7 +62,7 @@ and open the template in the editor.
         </script>
         <style>
             .kpis {
-                height: 75px;
+                height: 150px;
             }
             /* make room for the Bootstrap navbar, per
              * https://getbootstrap.com/docs/3.3/components/#navbar
@@ -84,12 +95,12 @@ and open the template in the editor.
                         <li><a onclick='leaflet()'> Leaflet</a></li>
                     </ul>
                 </div>
-                <div id='alert' class='alert alert-warning' role='alert'>
-                    This is a primary alert—check it out!
-                </div>
             </nav>
             
             <!-- alert bar -->
+            <div id='alert' class='alert alert-warning' role='alert' >
+                This is a primary alert—check it out!
+            </div>
             
             <!-- main content -->
             <div id='page-wrapper'>
@@ -111,15 +122,15 @@ and open the template in the editor.
                         <div class='row'>
                             <div class='col-sm-4'>
                                 <p><strong>KPI 1</strong> <span class='label label-warning'>Alert!</span></p>
-                                <div id='KPI1'></div>
+                                <div id='KPI1' class='kpis'></div>
                             </div>
                             <div class='col-sm-4'>
                                 <p><strong>KPI 2</strong></p>
-                                <div id='KPI2'></div>
+                                <div id='KPI2' class='kpis'></div>
                             </div>
                             <div class='col-sm-4'>
                                 <p><strong>KPI 3</strong> <span class='label label-danger'>Problem!</span></p>
-                                <div id='KPI3'></div>
+                                <div id='KPI3' class='kpis'></div>
                             </div>
                         </div>
                     </div>
