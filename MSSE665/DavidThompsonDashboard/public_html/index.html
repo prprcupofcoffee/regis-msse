@@ -12,38 +12,123 @@ and open the template in the editor.
         <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
         <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js'></script>
         <script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+        <script src="js/flotr2.min.js"></script>
         <script type='text/javascript'>
             var kpi1data;
             var kpi2data;
             var kpi3data;
             var kpi4data;
 
+            function showAlert(message) {
+                if (!message)
+                    $('#alert').hide();
+                else
+                    $('#alert').html(message).show();
+            }
             function clearKPIs() {
-                $('#alert').hide();
+                showAlert();
             }
             function flotr2() {
-                $('#alert').html('Flotr2 is not implemented yet!').show();
+                showAlert();
+
+                var kpi1div = $('#KPI1')[0];
+                Flotr.draw(kpi1div, kpi1data, {
+                    title: "2016 Revenue",
+                    HtmlText: false,
+                    yaxis: {
+                        min: 0,
+                        tickDecimals: 1,
+                        title: 'Millions'
+                    },
+                    xaxis: {
+                        autoscale: true,
+                        autoscaleMargin: 1,
+                        title: 'Quarters',
+                        ticks: [[1, '1st'], [2, '2nd'], [3, '3rd'], [4, '4th']]
+                    }
+                });
+                var kpi2div = $('#KPI2')[0];
+                Flotr.draw(kpi2div, kpi2data, {
+                    title: "2016 Expenses",
+                    HtmlText: false,
+                    yaxis: {
+                        min: 0,
+                        title: 'Millions'
+                    },
+                    xaxis: {
+                        autoscale: true,
+                        autoscaleMargin: 1,
+                        title: 'Quarters',
+                        ticks: [[1, '1st'], [2, '2nd'], [3, '3rd'], [4, '4th']]
+                    },
+                    bars: {
+                        show: true
+                    }
+                });
+                var kpi3div = $('#KPI3')[0];
+                var kpi3dataForPie = [
+                    { data: [kpi3data[0][0]], label: '1st' },
+                    { data: [kpi3data[0][1]], label: '2nd' },
+                    { data: [kpi3data[0][2]], label: '3rd' },
+                    { data: [kpi3data[0][3]], label: '4th' }
+                ]
+                Flotr.draw(kpi3div, kpi3dataForPie, {
+                    title: "2016 Profit",
+                    HtmlText: false,
+                    grid: {
+                        verticalLines: false,
+                        horizontalLines: false
+                    },
+                    yaxis: { showLabels: false },
+                    xaxis: { showLabels: false },
+                    pie: {
+                        show: true,
+                        explode: 2
+                    },
+                    legend: {
+                        position: 'se',
+                        backgroundColor: '#D2E8FF'
+                    }
+                });
+                var kpi4div = $('#KPI4')[0];
+                Flotr.draw(kpi4div, kpi4data, {
+                    title: "2016 Customers",
+                    yaxis: {
+                        min: 0,
+                        title: 'Thousands   '
+                    },
+                    xaxis: {
+                        autoscale: true,
+                        autoscaleMargin: 1,
+                        title: 'Quarters',
+                        ticks: [[1, '1st'], [2, '2nd'], [3, '3rd'], [4, '4th']]
+                    }
+                });
             }
             function chartjs() {
-                $('#alert').html('ChartJS is not implemented yet!').show();
+                showAlert('ChartJS is not implemented yet!');
             }
             function chartist() {
-                $('#alert').html('Chartist is not implemented yet!').show();
+                showAlert('Chartist is not implemented yet!');
             }
             function google() {
-                $('#alert').html('Google Charts is not implemented yet!').show();
+                showAlert('Google Charts is not implemented yet!');
             }
             function d3() {
-                $('#alert').html('D3 is not implemented yet!').show();
+                showAlert('D3 is not implemented yet!');
             }
             function leaflet() {
-                $('#alert').html('Leaflet is not implemented yet!').show();
+                showAlert('Leaflet is not implemented yet!');
             }
             
             $(function() {
                kpi1data = [[[1, 2.1], [2, 2.75], [3, 5.6], [4, 4.9]]];  // revenue 
                kpi2data = [[[1, 1.3], [2, 1.4], [3, 1.4], [4, 1.3]]];   // expenses 
-               kpi3data = [[[1, 0.8], [2, 1.35], [3, 4.2], [4, 3.6]]];  // profit 
+               kpi3data = [
+                   [
+                       [1, 0.8], [2, 1.35], [3, 4.2], [4, 3.6]
+                   ]
+               ];  // profit 
                kpi4data = [[[1, 75], [2, 83], [3, 150], [4, 130]]];     // customers
                
                $('#alert').hide();
@@ -51,7 +136,10 @@ and open the template in the editor.
         </script>
         <style>
             .kpis {
-                height: 75px;
+                height: 150px;
+            }
+            .container-kpis {
+                height: 200px;
             }
             /* make room for the Bootstrap navbar, per
              * https://getbootstrap.com/docs/3.3/components/#navbar
@@ -84,12 +172,12 @@ and open the template in the editor.
                         <li><a onclick='leaflet()'> Leaflet</a></li>
                     </ul>
                 </div>
-                <div id='alert' class='alert alert-warning' role='alert'>
-                    This is a primary alert—check it out!
-                </div>
             </nav>
             
             <!-- alert bar -->
+            <div id='alert' class='alert alert-warning' role='alert' >
+                This is a primary alert—check it out!
+            </div>
             
             <!-- main content -->
             <div id='page-wrapper'>
@@ -107,28 +195,28 @@ and open the template in the editor.
                     </div>
                     
                     <!-- KPI row 1 -->
-                    <div class='container-fluid bg-3 text-center kpis'>
+                    <div class='container-fluid bg-3 text-center container-kpis'>
                         <div class='row'>
                             <div class='col-sm-4'>
                                 <p><strong>KPI 1</strong> <span class='label label-warning'>Alert!</span></p>
-                                <div id='KPI1'></div>
+                                <div id='KPI1' class='kpis'></div>
                             </div>
                             <div class='col-sm-4'>
                                 <p><strong>KPI 2</strong></p>
-                                <div id='KPI2'></div>
+                                <div id='KPI2' class='kpis'></div>
                             </div>
                             <div class='col-sm-4'>
                                 <p><strong>KPI 3</strong> <span class='label label-danger'>Problem!</span></p>
-                                <div id='KPI3'></div>
+                                <div id='KPI3' class='kpis'></div>
                             </div>
                         </div>
                     </div>
 
                     <!-- KPI row 2 -->
-                    <div class='container-fluid bg-3 text-center kpis'>
+                    <div class='container-fluid bg-3 text-center container-kpis'>
                         <div class='row'>
                             <p><strong>KPI 4</strong> <span class='label label-success'>Nice!</span></p>
-                            <div id='KPI4'></div>
+                            <div id='KPI4' class='kpis'></div>
                         </div>
                     </div>
                 </div>
