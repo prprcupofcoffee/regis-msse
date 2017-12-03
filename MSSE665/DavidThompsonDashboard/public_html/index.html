@@ -21,6 +21,11 @@ and open the template in the editor.
         <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/chartist/0.10.1/chartist.min.css'>
         <script src='https://cdnjs.cloudflare.com/ajax/libs/chartist/0.10.1/chartist.min.js'></script>
         <script src='js/chartist-plugin-axistitle.js'></script>
+        <!-- Google Charts -->
+        <script src='https://www.gstatic.com/charts/loader.js'></script>
+        <script>
+            google.charts.load('current', { packages: ['corechart'] });
+        </script>
 
         <script type='text/javascript'>
             var kpi1data;
@@ -371,6 +376,125 @@ and open the template in the editor.
                 }
             };
 
+            // Configuration for Chartist charting
+            //
+            var googleChartsConfig = {
+                surfaceFor: function(element) {
+                    return element;
+                },
+                showKpiChart1: function(div) {
+                    var chart = new google.visualization.LineChart(div);
+                    chart.draw(
+                        google.visualization.arrayToDataTable([
+                            [ 'Quarters', 'Millions' ],
+                            [ '1st', kpi1data[0][0][1] ],
+                            [ '2nd', kpi1data[0][1][1] ],
+                            [ '3rd', kpi1data[0][2][1] ],
+                            [ '4th', kpi1data[0][3][1] ]
+                        ]),
+                        {
+                            title: '2016 Revenue',
+                            animation: {
+                                duration: 1000,
+                                easing: 'out',
+                                startup: true
+                            },
+                            legend: {
+                                position: 'none'
+                            },
+                            hAxis: {
+                                title: 'Quarter'
+                            },
+                            vAxis: {
+                                title: 'Millions'
+                            }
+                        }
+                    );
+                },
+                showKpiChart2: function(div) {
+                    var chart = new google.visualization.ColumnChart(div);
+                    chart.draw(
+                        google.visualization.arrayToDataTable([
+                            [ 'Quarters', 'Millions' ],
+                            [ '1st', kpi2data[0][0][1] ],
+                            [ '2nd', kpi2data[0][1][1] ],
+                            [ '3rd', kpi2data[0][2][1] ],
+                            [ '4th', kpi2data[0][3][1] ]
+                        ]),
+                        {
+                            title: '2016 Expenses',
+                            animation: {
+                                duration: 1000,
+                                easing: 'out',
+                                startup: true
+                            },
+                            legend: {
+                                position: 'none'
+                            },
+                            hAxis: {
+                                title: 'Quarter'
+                            },
+                            vAxis: {
+                                title: 'Millions'
+                            }
+                        }
+                    );
+                },
+                showKpiChart3: function(div) {
+                    var chart = new google.visualization.PieChart(div);
+                    chart.draw(
+                        google.visualization.arrayToDataTable([
+                            [ 'Quarters', 'Millions' ],
+                            [ '1st', kpi3data[0][0][1] ],
+                            [ '2nd', kpi3data[0][1][1] ],
+                            [ '3rd', kpi3data[0][2][1] ],
+                            [ '4th', kpi3data[0][3][1] ]
+                        ]),
+                        {
+                            title: '2016 Profits',
+                            animation: {
+                                startup: true
+                            },
+                            legend: {
+                                position: 'none'
+                            },
+                            slices: {
+                                0: { offset: 0.2 }
+                            }
+                        }
+                    );
+                },
+                showKpiChart4: function(div) {
+                    var chart = new google.visualization.AreaChart(div);
+                    chart.draw(
+                        google.visualization.arrayToDataTable([
+                            [ 'Quarters', 'Thousands' ],
+                            [ '1st', kpi4data[0][0][1] ],
+                            [ '2nd', kpi4data[0][1][1] ],
+                            [ '3rd', kpi4data[0][2][1] ],
+                            [ '4th', kpi4data[0][3][1] ]
+                        ]),
+                        {
+                            title: '2016 Customers',
+                            animation: {
+                                duration: 1000,
+                                easing: 'out',
+                                startup: true
+                            },
+                            legend: {
+                                position: 'none'
+                            },
+                            hAxis: {
+                                title: 'Quarter'
+                            },
+                            vAxis: {
+                                title: 'Thousands'
+                            }
+                        }
+                    );
+                }
+            };
+
             function showAlert(message) {
                 if (!message)
                     $('#alert').hide();
@@ -411,8 +535,11 @@ and open the template in the editor.
                 clearKPIs();
                 showCharts(chartistConfig);
             }
-            function google() {
-                showAlert('Google Charts is not implemented yet!');
+            function googleCharts() {
+                clearKPIs();
+                google.charts.setOnLoadCallback(function() {
+                    showCharts(googleChartsConfig);
+                });
             }
             function d3() {
                 showAlert('D3 is not implemented yet!');
@@ -463,7 +590,7 @@ and open the template in the editor.
                         <li><a onclick='flotr2()'> Flotr2</a></li>
                         <li><a onclick='chartjs()'> Chart.js</a></li>
                         <li><a onclick='chartist()'> Chartist.js</a></li>
-                        <li><a onclick='google()'> Google Charts</a></li>
+                        <li><a onclick='googleCharts()'> Google Charts</a></li>
                         <li><a onclick='d3()'> D3</a></li>
                         <li><a onclick='leaflet()'> Leaflet</a></li>
                     </ul>
