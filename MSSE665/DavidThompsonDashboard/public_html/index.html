@@ -82,7 +82,7 @@ and open the template in the editor.
                         { data: [kpi3data[0][1]], label: '2nd' },
                         { data: [kpi3data[0][2]], label: '3rd' },
                         { data: [kpi3data[0][3]], label: '4th' }
-                    ]
+                    ];
                     Flotr.draw(div, kpi3dataForPie, {
                         title: "2016 Profit",
                         HtmlText: false,
@@ -542,7 +542,7 @@ and open the template in the editor.
                     showCharts(googleChartsConfig);
                 });
             }
-            function d3chart() {
+            function d3chartHtml() {
                 clearKPIs();
                 
                 // lines of code in index.html by week
@@ -581,8 +581,78 @@ and open the template in the editor.
                             return d.lines;
                         });
             }
-            function leaflet() {
-                showAlert('Leaflet is not implemented yet!');
+            function d3chartSvg() {
+                clearKPIs();
+                
+                // lines of code in index.html by week
+                //
+                var dataset = [
+                    { label: 'Week 1', lines: 149 },
+                    { label: 'Week 2', lines: 237 },
+                    { label: 'Week 3', lines: 388 },
+                    { label: 'Week 4', lines: 533 },
+                    { label: 'Week 5', lines: 660 },
+                    { label: 'Week 6', lines: 727 }
+                ];
+
+                var margin = { top: 25, right: 50, bottom: 40, left: 100 };
+
+                var element = d3.select('#KPI4');
+                var boundingBox = element.node().getBoundingClientRect();
+
+                var width = boundingBox.width - (margin.left + margin.right);
+                var height = boundingBox.height - (margin.top + margin.bottom);
+                
+                var xScale = d3.scale.ordinal().rangePoints([0, width]);
+                var yScale = d3.scale.linear().range([height, 0]);
+                
+                var xAxis = d3.svg.axis().scale(xScale).orient('bottom');
+                var yAxis = d3.svg.axis().scale(yScale).orient('left');
+
+                xScale.domain(dataset.map(function(d) { return d.label; }));
+                yScale.domain([
+                    d3.min(dataset, function(d) { return d.lines; }),
+                    d3.max(dataset, function(d) { return d.lines; })
+                ]).nice(3);
+
+                element.append('svg')
+                       .attr('id', 'd3svgchart')
+                       .style('width', boundingBox.width)
+                       .style('height', boundingBox.height);
+
+                var chart = d3.select('#d3svgchart')
+                              .append('g')
+                              .attr('transform',
+                                    'translate(' + margin.left + ',' + margin.top + ')');
+
+                chart.append('g')
+                     .attr('class', 'x axis')
+                     .attr('transform', 'translate(0,' + height + ')')
+                     .call(xAxis)
+                     .append('text')
+                     .attr('x', width)
+                     .attr('y', -6)
+                     .style('text-anchor', 'end')
+                     .text('Week');
+
+                chart.append('g')
+                     .attr('class', 'y axis')
+                     .call(yAxis)
+                     .attr('transform', 'rotate(0)')
+                     .append('text')
+                     .attr('y', -20)
+                     .attr('dy', '.71em')
+                     .style('text-anchor', 'end')
+                     .text('Lines of Code');
+
+                dataset.forEach(function(d) {
+                    chart.append('circle')
+                         .attr('r', 5)
+                         .attr('cx', xScale(d.label))
+                         .attr('cy', yScale(d.lines))
+                         .style('fill', 'green')
+                         .style('stroke', '#000000');
+                });
             }
             
             $(function() {
@@ -658,8 +728,8 @@ and open the template in the editor.
                         <li><a onclick='chartjs()'> Chart.js</a></li>
                         <li><a onclick='chartist()'> Chartist.js</a></li>
                         <li><a onclick='googleCharts()'> Google Charts</a></li>
-                        <li><a onclick='d3chart()'> D3</a></li>
-                        <li><a onclick='leaflet()'> Leaflet</a></li>
+                        <li><a onclick='d3chartHtml()'> D3 (HTML)</a></li>
+                        <li><a onclick='d3chartSvg()'> D3 (SVG)</a></li>
                     </ul>
                 </div>
             </nav>
