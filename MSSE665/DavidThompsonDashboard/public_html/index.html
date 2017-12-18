@@ -536,12 +536,14 @@ and open the template in the editor.
                 clearKPIs();
                 showCharts(chartistConfig);
             }
+
             function googleCharts() {
                 clearKPIs();
                 google.charts.setOnLoadCallback(function() {
                     showCharts(googleChartsConfig);
                 });
             }
+
             function d3chartHtml() {
                 clearKPIs();
                 
@@ -581,6 +583,7 @@ and open the template in the editor.
                             return d.lines;
                         });
             }
+
             function d3chartSvg() {
                 clearKPIs();
                 
@@ -654,6 +657,142 @@ and open the template in the editor.
                          .style('stroke', '#000000');
                 });
             }
+
+            function d3chartSvgInteractive() {
+                clearKPIs();
+                
+                var kpi5 = document.getElementById('KPI5');
+
+                var divLegend = document.createElement('div');
+                divLegend.setAttribute('id', 'legend');
+                kpi5.appendChild(divLegend);
+
+                var divTimeAxis = document.createElement('div');
+                divTimeAxis.setAttribute('id', 'timeaxis');
+                divTimeAxis.setAttribute('class', 'kpis')
+                kpi5.appendChild(divTimeAxis);
+
+                // lines of code in index.html by week
+                //
+                var dataset = {
+                    labels: [
+                        'Week 1',
+                        'Week 2',
+                        'Week 3',
+                        'Week 4',
+                        'Week 5',
+                        'Week 6',
+                        'Week 7',
+                        'Week 8'
+                    ],
+                    series: [
+                        {
+                            id: 'nonCodeLines',
+                            title: 'Non-Code Lines',
+                            data: [[0, 2], [1, 3], [2, 8], [3, 17], [4, 21], [5, 29], [6, 42], [7, 71]]
+                        },
+                        {
+                            id: 'codeLines',
+                            title: 'Code Lines',
+                            data: [[0, 33], [1, 116], [2, 261], [3, 389], [4, 507], [5, 535], [6, 592], [7, 702]]
+                        },
+                        {
+                            id: 'totalLines',
+                            title: 'Total Lines',
+                            data: [[0, 35], [1, 119], [2, 269], [3, 406], [4, 528], [5, 564], [6, 634], [7, 773]]
+                        }
+                    ]
+                };
+
+                var margin = { top: 25, right: 50, bottom: 40, left: 100 };
+
+                var element = d3.select('#timeaxis');
+                var boundingBox = element.node().getBoundingClientRect();
+
+                var width = boundingBox.width - (margin.left + margin.right);
+                var height = boundingBox.height - (margin.top + margin.bottom);
+
+                // build the drawing space
+                //
+                element.append('svg')
+                       .attr('id', 'd3svgchart')
+                       .style('width', boundingBox.width)
+                       .style('height', boundingBox.height);
+
+                var chart = d3.select('#d3svgchart')
+                              .append('g')
+                              .attr('transform',
+                                    'translate(' + margin.left + ',' + margin.top + ')');
+
+                // set up X-axis
+                //
+                var xScale = d3.scale.ordinal().domain(dataset.labels).rangePoints([0, width]);
+                var xAxis = d3.svg.axis().scale(xScale).orient('bottom');
+
+                chart.append('g')
+                     .attr('class', 'x axis')
+                     .attr('transform', 'translate(0,' + height + ')')
+                     .call(xAxis)
+                     .append('text')
+                     .attr('x', width)
+                     .attr('y', -6)
+                     .style('text-anchor', 'end')
+                     .text('Week');
+
+                // set up Y-axis
+                //
+                var yScale = d3.scale.linear().range([height, 0]);
+                yScale.domain([
+                    d3.min(dataset.series[2].data, function(d) { return d[1]; }),
+                    d3.max(dataset.series[2].data, function(d) { return d[1]; })
+                ]).nice(3);
+                var yAxis = d3.svg.axis().scale(yScale).orient('left');
+
+                chart.append('g')
+                     .attr('class', 'y axis')
+                     .call(yAxis)
+                     .attr('transform', 'rotate(0)');
+
+                // populate the legend
+                //
+                var keys = d3.select('#legend')
+                             .selectAll('div')
+                             .data(dataset.series)
+                             .enter()
+                             .append('div')
+                             .attr('class', 'legend_entry')
+                             .attr('id', function(d) {
+                                 return 'stream_' + d.id + '_key';
+                             });
+                keys.append('div')
+                    .attr('id', function(d) { return 'legend_checkbox_' + d.id })
+                    .attr('class', function(d) { return 'legend_checkbox ' + d.id });
+                keys.append('div')
+                    .attr('class', 'legend_label')
+                    .text(function(d) { return d.title; });
+                
+                // make the legend interactive
+                //
+                d3.selectAll('.legend_entry')
+                  .on('click', function(d) {
+                      var id = d.id;
+                      var elementClass = 'point_' + id;
+                      var ts = d3.selectAll('.' + elementClass);
+
+                      if (!ts.empty()) {
+                          ts.remove();
+                      } else {
+                          d.data.forEach(function(dd) {
+                              chart.append('circle')
+                                   .attr('r', 5)
+                                   .attr('cx', xScale(dataset.labels[dd[0]]))
+                                   .attr('cy', yScale(dd[1]))
+                                   .attr('class', elementClass)
+                                   .style('stroke', '#000000');
+                          });
+                      }
+                  });
+            }
             
             $(function() {
                kpi1data = [[[1, 2.1], [2, 2.75], [3, 5.6], [4, 4.9]]];  // revenue 
@@ -708,6 +847,49 @@ and open the template in the editor.
                 text-align: right;
                 margin-left: 11em;
             }
+            #legend {
+                width: 15%;
+                float: right;
+            }
+            #timeaxis {
+                width: 85%;
+                float: left;
+            }
+            .legend_entry {
+                font-size: 12px;
+                width: 100%;
+            }
+            .legend_label {
+                font-size: 12px;
+                text-align: left;
+            }
+            .legend_checkbox {
+                height: 10px;
+                width: 10px;
+                outline: solid 1px black;
+                float: left;
+                margin-right: 10px;
+                margin-top: 6px;
+                margin-left: 10px;
+            }
+            #legend_checkbox_nonCodeLines {
+                background-color: aqua;
+            }
+            #legend_checkbox_codeLines {
+                background-color: crimson;
+            }
+            #legend_checkbox_totalLines {
+                background-color: forestgreen;
+            }
+            .point_nonCodeLines {
+                fill: aqua;
+            }
+            .point_codeLines {
+                fill: crimson;
+            }
+            .point_totalLines {
+                fill: forestgreen;
+            }
         </style>
     </head>
     <body>
@@ -730,6 +912,7 @@ and open the template in the editor.
                         <li><a onclick='googleCharts()'> Google Charts</a></li>
                         <li><a onclick='d3chartHtml()'> D3 (HTML)</a></li>
                         <li><a onclick='d3chartSvg()'> D3 (SVG)</a></li>
+                        <li><a onclick='d3chartSvgInteractive()'> D3 (Interactive)</a></li>
                     </ul>
                 </div>
             </nav>
@@ -777,6 +960,14 @@ and open the template in the editor.
                         <div class='row'>
                             <p><strong>KPI 4</strong> <span class='label label-success'>Nice!</span></p>
                             <div id='KPI4' class='kpis'></div>
+                        </div>
+                    </div>
+
+                    <!-- KPI row 3 -->
+                    <div class='container-fluid bg-3 text-center container-kpis'>
+                        <div class='row'>
+                            <p><strong>KPI 5</strong></p>
+                            <div id='KPI5' class='kpis'></div>
                         </div>
                     </div>
                 </div>
