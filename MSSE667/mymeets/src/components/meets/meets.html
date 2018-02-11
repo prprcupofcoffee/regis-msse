@@ -1,8 +1,8 @@
 <!-- Template for the MeetsComponent component -->
 <div *ngIf="meets">
-  <ul>
-    <li *ngFor="let meet of meets">
+  <ion-list>
+    <div *ngFor="let meet of meets">
       <meet-detail [meet]="meet"></meet-detail>
-    </li>
-  </ul>
+    </div>
+  </ion-list>
 </div>

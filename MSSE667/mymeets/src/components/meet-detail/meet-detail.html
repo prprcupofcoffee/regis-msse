@@ -1,5 +1,11 @@
 <!-- Template for the MeetDetailComponent component -->
 <div *ngIf="meet">
-  <h2>Meet name: {{ meet.name }}</h2>
-  <h4>Meet location: {{ meet.location }}</h4>
+  <ion-card>
+    <ion-card-header>
+        Meet name: {{ meet.name }}
+    </ion-card-header>
+    <ion-card-content>
+        Meet location: {{ meet.location }}
+    </ion-card-content>
+  </ion-card>
 </div>
