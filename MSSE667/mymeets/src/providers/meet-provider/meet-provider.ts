@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 
-import { CourseType } from '../../app/course-type';
 import { Meet } from '../../models/meet';
 
 /*

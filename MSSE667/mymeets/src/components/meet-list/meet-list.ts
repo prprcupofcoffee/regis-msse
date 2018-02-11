@@ -3,16 +3,16 @@ import { Meet } from '../../models/meet';
 import { MeetProvider } from '../../providers/meet-provider/meet-provider';
 
 /**
- * Generated class for the MeetsComponent component.
+ * Generated class for the MeetListComponent component.
  *
  * See https://angular.io/api/core/Component for more info on Angular
  * Components.
  */
 @Component({
-  selector: 'meets',
-  templateUrl: 'meets.html'
+  selector: 'meet-list',
+  templateUrl: 'meet-list.html'
 })
-export class MeetsComponent implements OnInit {
+export class MeetListComponent implements OnInit {
 
   meets: Meet[];
 

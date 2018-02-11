@@ -6,7 +6,7 @@ import { HttpClientInMemoryWebApiModule, InMemoryWebApiModule } from 'angular-in
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { MeetListPage } from '../pages/meet-list/meet-list';
+import { MeetsPage } from '../pages/meets/meets';
 
 import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
@@ -14,8 +14,8 @@ import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
 import { TabsPage } from '../pages/tabs/tabs';
 import { MeetProvider } from '../providers/meet-provider/meet-provider';
-import { MeetsComponent } from '../components/meets/meets';
-import { MeetDetailComponent } from '../components/meet-detail/meet-detail';
+import { MeetListComponent } from '../components/meet-list/meet-list';
+import { MeetListItemComponent } from '../components/meet-list-item/meet-list-item';
 import { InMemoryDataService } from './in-memory-data-service';
 
 @NgModule({
@@ -24,9 +24,9 @@ import { InMemoryDataService } from './in-memory-data-service';
     AboutPage,
     ContactPage,
     HomePage,
-    MeetDetailComponent,
-    MeetListPage,
-    MeetsComponent,
+    MeetListComponent,
+    MeetListItemComponent,
+    MeetsPage,
     TabsPage
   ],
   imports: [
@@ -47,7 +47,7 @@ import { InMemoryDataService } from './in-memory-data-service';
     AboutPage,
     ContactPage,
     HomePage,
-    MeetListPage,
+    MeetsPage,
     TabsPage
   ],
   providers: [

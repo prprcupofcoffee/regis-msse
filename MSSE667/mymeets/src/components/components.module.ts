@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
-import { MeetsComponent } from './meets/meets';
-import { MeetDetailComponent } from './meet-detail/meet-detail';
+import { MeetListComponent } from './meet-list/meet-list';
+import { MeetListItemComponent } from './meet-list-item/meet-list-item';
 @NgModule({
-	declarations: [MeetsComponent,
-    MeetDetailComponent],
+	declarations: [MeetListComponent,
+    MeetListItemComponent],
 	imports: [],
-	exports: [MeetsComponent,
-    MeetDetailComponent]
+	exports: [MeetListComponent,
+    MeetListItemComponent]
 })
 export class ComponentsModule {}

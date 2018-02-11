@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
 @Component({
-  selector: 'page-meet-list',
-  templateUrl: 'meet-list.html'
+  selector: 'page-meets',
+  templateUrl: 'meets.html'
 })
-export class MeetListPage {
+export class MeetsPage {
   icons: string[];
   items: Array<{ name: string, note: string, icon: string }>;
 
