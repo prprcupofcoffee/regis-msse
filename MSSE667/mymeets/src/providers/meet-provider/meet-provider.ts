@@ -17,7 +17,11 @@ export class MeetProvider {
 
   constructor(private http: HttpClient) { }
 
-  getMeets(): Observable<Meet[]> {
+  getAll(): Observable<Meet[]> {
     return this.http.get<Meet[]>(this.meetsUrl);
   }
+
+  // getById(id: number): Meet {
+  //   return this.http.get(`{this.meetsUrl}/{id}`)
+  // }
 }

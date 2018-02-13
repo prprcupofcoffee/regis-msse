@@ -39,6 +39,6 @@ export class MeetListComponent implements OnInit {
   }
 
   private getMeets() {
-    this.meetProvider.getMeets().subscribe(meets => this.meets = meets);
+    this.meetProvider.getAll().subscribe(meets => this.meets = meets);
   }
 }
