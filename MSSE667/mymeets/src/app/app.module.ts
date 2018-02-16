@@ -12,6 +12,7 @@ import { MyApp } from './app.component';
 import { AboutPage } from '../pages/about/about';
 import { ContactPage } from '../pages/contact/contact';
 import { HomePage } from '../pages/home/home';
+import { MeetDetailsPage } from '../pages/meet-details/meet-details';
 import { TabsPage } from '../pages/tabs/tabs';
 import { MeetProvider } from '../providers/meet-provider/meet-provider';
 import { MeetListComponent } from '../components/meet-list/meet-list';
@@ -24,6 +25,7 @@ import { InMemoryDataService } from './in-memory-data-service';
     AboutPage,
     ContactPage,
     HomePage,
+    MeetDetailsPage,
     MeetListComponent,
     MeetListItemComponent,
     MeetsPage,
@@ -47,6 +49,7 @@ import { InMemoryDataService } from './in-memory-data-service';
     AboutPage,
     ContactPage,
     HomePage,
+    MeetDetailsPage,
     MeetsPage,
     TabsPage
   ],

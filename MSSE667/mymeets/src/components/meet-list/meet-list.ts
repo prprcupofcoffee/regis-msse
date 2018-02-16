@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { AlertController } from 'ionic-angular';
+import { AlertController, NavController } from 'ionic-angular';
 
 import { Meet } from '../../models/meet';
+import { MeetDetailsPage } from '../../pages/meet-details/meet-details';
 import { MeetProvider } from '../../providers/meet-provider/meet-provider';
 
 /**
@@ -21,21 +22,23 @@ export class MeetListComponent implements OnInit {
 
   constructor(
     private meetProvider: MeetProvider,
-    private alertCtrl: AlertController) { }
+    private alertCtrl: AlertController,
+    private navCtrl: NavController) { }
 
   ngOnInit() {
     this.getMeets();
   }
 
   itemClicked(selectedMeet: Meet): void {
-    let alertTitle: string = selectedMeet.name;
-    let alertSubTitle: string = selectedMeet.location;
-    let alert = this.alertCtrl.create({
-      title: alertTitle,
-      subTitle: alertSubTitle,
-      buttons: ['Close']
-    });
-    alert.present();
+    this.navCtrl.push(MeetDetailsPage, { 'meet': selectedMeet });
+    // let alertTitle: string = selectedMeet.name;
+    // let alertSubTitle: string = selectedMeet.location;
+    // let alert = this.alertCtrl.create({
+    //   title: alertTitle,
+    //   subTitle: alertSubTitle,
+    //   buttons: ['Close']
+    // });
+    // alert.present();
   }
 
   private getMeets() {
