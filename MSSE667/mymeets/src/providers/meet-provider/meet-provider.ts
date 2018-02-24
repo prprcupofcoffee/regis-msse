@@ -21,7 +21,7 @@ export class MeetProvider {
     return this.http.get<Meet[]>(this.meetsUrl);
   }
 
-  // getById(id: number): Meet {
-  //   return this.http.get(`{this.meetsUrl}/{id}`)
-  // }
+  getById(id: number): Observable<Meet> {
+    return this.http.get<Meet>(`{this.meetsUrl}/{id}`)
+  }
 }
