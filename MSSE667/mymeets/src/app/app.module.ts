@@ -17,7 +17,7 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { MeetProvider } from '../providers/meet-provider/meet-provider';
 import { MeetListComponent } from '../components/meet-list/meet-list';
 import { MeetListItemComponent } from '../components/meet-list-item/meet-list-item';
-import { InMemoryDataService } from './in-memory-data-service';
+import { MeetsDataService } from '../in-memory-data-services/meets-data-service';
 
 @NgModule({
   declarations: [
@@ -40,7 +40,7 @@ import { InMemoryDataService } from './in-memory-data-service';
     // and returns simulated server responses.
     // Remove it when a real server is ready to receive requests.
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
+      MeetsDataService, { dataEncapsulation: false }
     )
   ],
   bootstrap: [IonicApp],

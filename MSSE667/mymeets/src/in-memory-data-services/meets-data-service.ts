@@ -1,7 +1,7 @@
 import { InMemoryDbService } from 'angular-in-memory-web-api';
-import { CourseType } from './course-type';
+import { CourseType } from '../app/course-type';
 
-export class InMemoryDataService implements InMemoryDbService {
+export class MeetsDataService implements InMemoryDbService {
     createDb() {
         const meets = [
             {
